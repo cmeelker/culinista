@@ -1,5 +1,9 @@
 <template>
-  <h1>Titel</h1>
+  <div class="app">
+    <AppLayout />
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AppLayout from "@/components/main/AppLayout.vue";
+</script>

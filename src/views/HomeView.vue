@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1>Hallo</h1>
+    <p>Recepten pagina</p>
   </main>
 </template>
 

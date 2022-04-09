@@ -24,6 +24,7 @@ module.exports = {
     "prettier/prettier": ["error", { endOfLine: "auto" }],
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    "vue/multi-word-component-names": ["error", { ignores: ["Header"] }],
   },
   overrides: [
     {
