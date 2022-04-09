@@ -4,7 +4,6 @@ import lang from "quasar/lang/nl.js";
 import "@quasar/extras/roboto-font/roboto-font.css";
 import "@quasar/extras/ionicons-v4/ionicons-v4.css";
 
-// To be used on app.use(Quasar, { ... })
 export default {
   config: {},
   plugins: {},
