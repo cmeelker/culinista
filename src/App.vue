@@ -1,119 +1,114 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <q-layout view="lHh Lpr lFf">
+    <q-header elevated class="glossy">
+      <q-toolbar>
+        <q-btn
+          flat
+          dense
+          round
+          @click="leftDrawerOpen = !leftDrawerOpen"
+          aria-label="Menu"
+          icon="ion-menu"
+        />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+        <q-toolbar-title> Quasar App </q-toolbar-title>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+        <div>Quasar v{{ $q.version }}</div>
+      </q-toolbar>
+    </q-header>
 
-  <RouterView />
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="bg-grey-2">
+      <q-list>
+        <q-item-label header>Essential Links</q-item-label>
+        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
+          <q-item-section avatar>
+            <q-icon name="ion-school" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Docs</q-item-label>
+            <q-item-label caption>quasar.dev</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item
+          clickable
+          tag="a"
+          target="_blank"
+          href="https://github.com/quasarframework/"
+        >
+          <q-item-section avatar>
+            <q-icon name="ion-code" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Github</q-item-label>
+            <q-item-label caption>github.com/quasarframework</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item
+          clickable
+          tag="a"
+          target="_blank"
+          href="https://chat.quasar.dev"
+        >
+          <q-item-section avatar>
+            <q-icon name="ion-chatbubbles" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Discord Chat Channel</q-item-label>
+            <q-item-label caption>chat.quasar.dev</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item
+          clickable
+          tag="a"
+          target="_blank"
+          href="https://forum.quasar.dev"
+        >
+          <q-item-section avatar>
+            <q-icon name="ion-chatboxes" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Forum</q-item-label>
+            <q-item-label caption>forum.quasar.dev</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item
+          clickable
+          tag="a"
+          target="_blank"
+          href="https://twitter.com/quasarframework"
+        >
+          <q-item-section avatar>
+            <q-icon name="ion-logo-twitter" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Twitter</q-item-label>
+            <q-item-label caption>@quasarframework</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-drawer>
+
+    <q-page-container>
+      <HelloWorld />
+    </q-page-container>
+  </q-layout>
 </template>
 
-<style>
-@import '@/assets/base.css';
+<script lang="ts">
+import { ref } from "vue";
+import HelloWorld from "./components/HelloWorld.vue";
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+export default {
+  name: "LayoutDefault",
 
-  font-weight: normal;
-}
+  components: {
+    HelloWorld,
+  },
 
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+  setup() {
+    return {
+      leftDrawerOpen: ref(false),
+    };
+  },
+};
+</script>
