@@ -9,4 +9,4 @@ pipelines:
             variables:
                 APP_LOCATION: '$BITBUCKET_CLONE_DIR/src'
                 OUTPUT_LOCATION: '$BITBUCKET_CLONE_DIR'
-                API_TOKEN: $deployment_token​
+                API_TOKEN: $deployment_token
