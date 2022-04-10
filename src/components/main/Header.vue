@@ -20,7 +20,7 @@
           <q-btn class="add-button" label="Recept toevoegen" />
         </div>
       </div>
-      <div class="right"><img src="@/assets/pasta-bro-bottom-cut.png" /></div>
+      <div class="right"><img src="@/assets/pasta-bro.png" /></div>
     </div>
   </div>
 </template>
