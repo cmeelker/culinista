@@ -5,8 +5,16 @@ pipelines:
         name: Deploy to test
         deployment: test
         script:
-          - pipe: microsoft/azure-static-web-apps-deploy:main
+          - npm install
+          - npm run build
+          - pipe: microsoft/azure-storage-deploy:2.0.1
             variables:
-                APP_LOCATION: '$BITBUCKET_CLONE_DIR'
-                OUTPUT_LOCATION: '$BITBUCKET_CLONE_DIR'
-                API_TOKEN: $deployment_token
+              SOURCE: '/dist'
+              DESTINATION: 'https://culinista.blob.core.windows.net/$web'
+              DESTINATION_SAS_TOKEN: $AZURE_STORAGE_SAS_TOKEN
+          DEBUG: 'true'
+          # - pipe: microsoft/azure-static-web-apps-deploy:main
+          #   variables:
+          #       APP_LOCATION: '$BITBUCKET_CLONE_DIR'
+          #       OUTPUT_LOCATION: '$BITBUCKET_CLONE_DIR'
+          #       API_TOKEN: $deployment_token
