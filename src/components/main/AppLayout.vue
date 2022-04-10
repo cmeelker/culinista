@@ -17,6 +17,12 @@ import Header from "@/components/main/Header.vue";
   background-color: $light;
 }
 
+@media only screen and (max-width: 500px) {
+  .header {
+    height: 80px;
+  }
+}
+
 .router-view {
   border-top: 1px solid $dark;
   margin-right: 20px;

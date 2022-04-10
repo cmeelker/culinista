@@ -20,7 +20,9 @@
           <q-btn class="add-button" label="Recept toevoegen" />
         </div>
       </div>
-      <div class="right"><img src="@/assets/pasta-bro.png" /></div>
+      <div class="right">
+        <img src="@/assets/pasta-bro.png" />
+      </div>
     </div>
   </div>
 </template>
@@ -87,6 +89,12 @@
     position: absolute;
     height: 400px;
     top: -50px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .content {
+    display: none;
   }
 }
 </style>
