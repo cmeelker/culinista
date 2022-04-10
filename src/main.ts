@@ -6,6 +6,7 @@ import router from "./router";
 import { Quasar } from "quasar";
 import quasarUserOptions from "./quasar-user-options";
 import "quasar/dist/quasar.sass";
+import "./styles/quasar.scss";
 
 const app = createApp(App);
 

@@ -65,14 +65,15 @@
 }
 
 .slogan {
-  margin-left: 250px;
+  margin-left: 30%;
   h3 {
     margin-bottom: 20px;
+    color: $dark;
   }
 }
 
 .add-button {
-  margin-left: 250px;
+  margin-left: 30%;
 }
 
 .add-button {

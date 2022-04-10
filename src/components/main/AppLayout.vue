@@ -22,6 +22,5 @@ import Header from "@/components/main/Header.vue";
   margin-right: 20px;
   margin-left: 20px;
   background-color: white;
-  height: 500px;
 }
 </style>

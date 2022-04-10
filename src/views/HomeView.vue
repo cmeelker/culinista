@@ -1,7 +1,43 @@
 <template>
-  <main>
-    <p>Recepten pagina</p>
-  </main>
+  <div class="home">
+    <div class="recipe-card-container">
+      <div v-for="(recipe, i) in recipes" :key="i">
+        <RecipeCard :recipe="recipe" />
+      </div>
+    </div>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import RecipeCard from "@/components/RecipeCard.vue";
+
+const recipes = [
+  "Kippensoep",
+  "Andere soep",
+  "Kippensoep",
+  "Andere soep",
+  "Kippensoep",
+  "Andere soep",
+  "Kippensoep",
+  "Andere soep",
+  "Kippensoep",
+];
+</script>
+
+<style scoped lang="scss">
+.home {
+  display: flex;
+}
+
+.filter-area {
+  margin: 20px;
+  flex: 1;
+}
+.recipe-card-container {
+  flex: 4;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+  gap: 5px;
+  margin: 10px;
+}
+</style>
