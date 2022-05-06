@@ -10,18 +10,18 @@
 
 <script setup lang="ts">
 import RecipeCard from "@/components/RecipeCard.vue";
+import type { Recipe } from "@/models/Recipe";
 
-const recipes = [
-  "Kippensoep",
-  "Andere soep",
-  "Kippensoep",
-  "Andere soep",
-  "Kippensoep",
-  "Andere soep",
-  "Kippensoep",
-  "Andere soep",
-  "Kippensoep",
-];
+const recipe: Recipe = {
+  id: 1,
+  title: "Ravioli met crème van kikkererwten met een hele lange titel",
+  labels: ["Snel", "Gezond"],
+  ingredients: "Kikkererwten",
+  image: "image",
+  logo: "logo",
+};
+
+const recipes = [recipe, recipe, recipe, recipe];
 </script>
 
 <style scoped lang="scss">

@@ -14,7 +14,7 @@ import Header from "@/components/main/Header.vue";
 
 .header {
   height: 350px;
-  background-color: $light;
+  background-color: $background;
 }
 
 @media only screen and (max-width: 500px) {
