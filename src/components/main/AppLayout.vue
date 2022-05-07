@@ -13,14 +13,8 @@ import Header from "@/components/main/Header.vue";
 @import "@/styles/quasar.variables.scss";
 
 .header {
-  height: 350px;
+  height: 80px;
   background-color: $background;
-}
-
-@media only screen and (max-width: 500px) {
-  .header {
-    height: 80px;
-  }
 }
 
 .router-view {

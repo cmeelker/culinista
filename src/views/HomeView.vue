@@ -12,6 +12,8 @@
 import RecipeCard from "@/components/RecipeCard.vue";
 import type { Recipe } from "@/models/Recipe";
 
+// recipes uit store halen
+
 const recipe: Recipe = {
   id: 1,
   title: "Ravioli met crème van kikkererwten met een hele lange titel",

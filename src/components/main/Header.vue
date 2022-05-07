@@ -4,24 +4,18 @@
       <div class="logo">
         <img src="@/assets/culinista.png" />
       </div>
-      <div class="login">
-        <q-btn class="login-button" outline label="Log in" />
-      </div>
-    </div>
-    <div class="content">
-      <div class="left">
-        <div class="slogan">
-          <h3>
-            Al je recepten <br />
-            op één plek
-          </h3>
+      <div class="right-section">
+        <div>
+          <nav class="stroke">
+            <ul>
+              <li><a href="#">Recept toevoegen</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
         </div>
-        <div class="add-recipe">
-          <q-btn class="add-button" label="Recept toevoegen" />
+        <div class="login">
+          <q-btn class="login-button" outline label="Log in" />
         </div>
-      </div>
-      <div class="right">
-        <img src="@/assets/pasta-bro.png" />
       </div>
     </div>
   </div>
@@ -51,50 +45,59 @@
   }
 }
 
+.right-section {
+  display: flex;
+  align-items: center;
+}
+
 .login {
   .button {
     color: $dark;
   }
 }
 
-.content {
-  display: flex;
-  height: 100%;
+nav ul {
+  list-style: none;
+  text-align: center;
+}
+nav ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
+nav ul li a {
+  display: block;
+  padding: 10px;
+  margin: 0px 10px 0px 10px;
+  text-decoration: none;
+  color: rgb(144, 144, 144);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+  transition: all 0.5s;
+}
+nav ul li a:hover {
+  color: #555;
 }
 
-.left {
-  flex: 10;
+nav.stroke ul li a {
+  position: relative;
 }
-
-.slogan {
-  margin-left: 30%;
-  h3 {
-    margin-bottom: 20px;
-    color: $dark;
-  }
+nav.stroke ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: ".";
+  color: transparent;
+  background: $accent;
+  height: 2px;
 }
-
-.add-button {
-  margin-left: 30%;
-}
-
-.add-button {
-  color: white;
-  background-color: $primary;
-}
-
-.right {
-  flex: 8;
-  img {
-    position: absolute;
-    height: 400px;
-    top: -50px;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .content {
-    display: none;
-  }
+nav.stroke ul li a:hover:after {
+  width: 100%;
 }
 </style>
