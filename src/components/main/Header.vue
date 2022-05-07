@@ -69,7 +69,7 @@ nav ul li a {
   padding: 10px;
   margin: 0px 10px 0px 10px;
   text-decoration: none;
-  color: rgb(144, 144, 144);
+  color: rgb(117, 117, 117);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -79,7 +79,7 @@ nav ul li a:before {
   transition: all 0.5s;
 }
 nav ul li a:hover {
-  color: #555;
+  color: $dark;
 }
 
 nav.stroke ul li a {
