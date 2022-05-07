@@ -10,7 +10,7 @@
         <h4>Culinista</h4>
       </div>
     </div>
-    <div class="menu-section-hide" id="menu-section-hide">
+    <div class="menu-section" id="menu-section">
       <div class="menu">
         <nav class="stroke">
           <ul>
@@ -28,12 +28,14 @@
 
 <script setup lang="ts">
 function toggleMenu() {
-  const x = document.getElementById("menu-section-hide");
+  const x = document.getElementById("menu-section");
 
-  if (x.className === "menu-section") {
-    x.className += "-hide";
-  } else {
-    x.className = "menu-section";
+  if (x) {
+    if (x.className === "menu-section") {
+      x.className += "-hide";
+    } else {
+      x.className = "menu-section";
+    }
   }
 }
 </script>
@@ -61,6 +63,28 @@ function toggleMenu() {
   display: none;
 }
 
+.logo {
+  h4 {
+    font-weight: 800;
+    text-transform: uppercase;
+    color: $dark;
+  }
+}
+
+.menu-section {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  .button {
+    color: $dark;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .header {
     flex-direction: column;
@@ -71,12 +95,7 @@ function toggleMenu() {
   }
 
   .menu-section {
-    flex-direction: column;
-    position: relative;
-    background-color: $background;
-    border-bottom: 1px solid black;
-    margin-right: 0px !important;
-    padding-bottom: 15px;
+    display: none;
   }
 
   .menu {
@@ -98,27 +117,12 @@ function toggleMenu() {
 }
 
 .menu-section-hide {
-  display: none;
-}
-
-.logo {
-  h4 {
-    font-weight: 800;
-    text-transform: uppercase;
-    color: $dark;
-  }
-}
-
-.menu-section {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-}
-
-.login {
-  .button {
-    color: $dark;
-  }
+  flex-direction: column;
+  position: relative;
+  background-color: $background;
+  border-bottom: 1px solid black;
+  margin-right: 0px !important;
+  padding-bottom: 15px;
 }
 
 nav ul {
