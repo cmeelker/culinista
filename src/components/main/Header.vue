@@ -10,8 +10,8 @@
         <h4>Culinista</h4>
       </div>
     </div>
-    <div class="menu-section">
-      <div class="menu" id="menu">
+    <div class="menu-section-hide" id="menu-section-hide">
+      <div class="menu">
         <nav class="stroke">
           <ul>
             <li><a href="#">Recept toevoegen</a></li>
@@ -28,13 +28,12 @@
 
 <script setup lang="ts">
 function toggleMenu() {
-  alert("hallo");
-  const x = document.getElementById("menu");
+  const x = document.getElementById("menu-section-hide");
 
-  if (x.className === "menu") {
-    x.className += "-responsive";
+  if (x.className === "menu-section") {
+    x.className += "-hide";
   } else {
-    x.className = "menu";
+    x.className = "menu-section";
   }
 }
 </script>
@@ -73,10 +72,33 @@ function toggleMenu() {
 
   .menu-section {
     flex-direction: column;
+    position: relative;
+    background-color: $background;
+    border-bottom: 1px solid black;
+    margin-right: 0px !important;
+    padding-bottom: 15px;
+  }
+
+  .menu {
+    width: 100%;
+  }
+
+  nav ul {
+    flex-direction: column;
+    padding-left: 5px;
+
+    li {
+      margin-right: 2px !important;
+      padding: 15px;
+      margin-bottom: -1px;
+      border-top: 1px solid #d4d4d3;
+      border-bottom: 1px solid #d4d4d3;
+    }
   }
 }
 
-.menu-responsive {
+.menu-section-hide {
+  display: none;
 }
 
 .logo {
