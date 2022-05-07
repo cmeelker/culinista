@@ -1,32 +1,51 @@
 <template>
   <div class="header">
     <div class="navbar">
-      <div class="logo">
-        <img src="@/assets/culinista.png" />
+      <div class="mobile-menu">
+        <q-btn flat @click="toggleMenu">
+          <q-icon name="ion-menu" size="md" />
+        </q-btn>
       </div>
-      <div class="right-section">
-        <div>
-          <nav class="stroke">
-            <ul>
-              <li><a href="#">Recept toevoegen</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </nav>
-        </div>
-        <div class="login">
-          <q-btn class="login-button" outline label="Log in" />
-        </div>
+      <div class="logo">
+        <h4>Culinista</h4>
+      </div>
+    </div>
+    <div class="menu-section">
+      <div class="menu" id="menu">
+        <nav class="stroke">
+          <ul>
+            <li><a href="#">Recept toevoegen</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="login">
+        <q-btn class="login-button" outline label="Log in" />
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+function toggleMenu() {
+  alert("hallo");
+  const x = document.getElementById("menu");
+
+  if (x.className === "menu") {
+    x.className += "-responsive";
+  } else {
+    x.className = "menu";
+  }
+}
+</script>
 
 <style scoped lang="scss">
 @import "@/styles/quasar.variables.scss";
 
 .header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .navbar {
@@ -39,15 +58,39 @@
   margin-right: 20px;
 }
 
-.logo {
-  img {
-    height: 40px;
+.mobile-menu {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .menu-section {
+    flex-direction: column;
   }
 }
 
-.right-section {
+.menu-responsive {
+}
+
+.logo {
+  h4 {
+    font-weight: 800;
+    text-transform: uppercase;
+    color: $dark;
+  }
+}
+
+.menu-section {
   display: flex;
   align-items: center;
+  margin-right: 20px;
 }
 
 .login {
@@ -59,13 +102,12 @@
 nav ul {
   list-style: none;
   text-align: center;
+  display: flex;
 }
 nav ul li {
-  display: inline-block;
   margin-right: 20px;
 }
 nav ul li a {
-  display: block;
   padding: 10px;
   margin: 0px 10px 0px 10px;
   text-decoration: none;
