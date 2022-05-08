@@ -11,8 +11,11 @@
 <script setup lang="ts">
 import RecipeCard from "@/components/RecipeCard.vue";
 import type { Recipe } from "@/models/Recipe";
+// import { useRecipeStore } from "@/stores/recipe";
 
 // recipes uit store halen
+// const recipeStore = useRecipeStore();
+// const test = recipeStore.fetchRecipes();
 
 const recipe: Recipe = {
   id: 1,
@@ -23,7 +26,20 @@ const recipe: Recipe = {
   logo: "logo",
 };
 
-const recipes = [recipe, recipe, recipe, recipe];
+const recipes = [
+  recipe,
+  recipe,
+  recipe,
+  recipe,
+  recipe,
+  recipe,
+  recipe,
+  recipe,
+  recipe,
+  recipe,
+  recipe,
+  recipe,
+];
 </script>
 
 <style scoped lang="scss">

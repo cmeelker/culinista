@@ -105,6 +105,7 @@ function toggleMenu() {
   nav ul {
     flex-direction: column;
     padding-left: 5px;
+    margin-top: 0px;
 
     li {
       margin-right: 2px !important;
