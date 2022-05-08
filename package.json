@@ -9,6 +9,7 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@jeroenhuinink/tsmapper": "^0.0.13",
     "@quasar/extras": "^1.13.5",
     "axios": "^0.27.2",
     "pinia": "^2.0.13",

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="recipe-card-container">
-      <div v-for="(recipe, i) in recipes" :key="i">
+      <div v-for="(recipe, i) in recipeStore.recipes" :key="i">
         <RecipeCard :recipe="recipe" />
       </div>
     </div>
@@ -10,36 +10,10 @@
 
 <script setup lang="ts">
 import RecipeCard from "@/components/RecipeCard.vue";
-import type { Recipe } from "@/models/Recipe";
-// import { useRecipeStore } from "@/stores/recipe";
+import { useRecipeStore } from "@/stores/recipe";
 
-// recipes uit store halen
-// const recipeStore = useRecipeStore();
-// const test = recipeStore.fetchRecipes();
-
-const recipe: Recipe = {
-  id: 1,
-  title: "Ravioli met crème van kikkererwten met een hele lange titel",
-  labels: ["Snel", "Gezond"],
-  ingredients: "Kikkererwten",
-  image: "image",
-  logo: "logo",
-};
-
-const recipes = [
-  recipe,
-  recipe,
-  recipe,
-  recipe,
-  recipe,
-  recipe,
-  recipe,
-  recipe,
-  recipe,
-  recipe,
-  recipe,
-  recipe,
-];
+const recipeStore = useRecipeStore();
+recipeStore.fetchRecipes();
 </script>
 
 <style scoped lang="scss">

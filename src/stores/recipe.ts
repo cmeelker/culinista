@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import axios from "@/services/ApiClient";
 
-import type { Recipe } from "@/models/Recipe";
+import { recipeMapper, type Recipe } from "@/models/Recipe";
+import type { Source } from "@jeroenhuinink/tsmapper";
 
 interface State {
   recipes: Recipe[];
@@ -15,8 +16,11 @@ export const useRecipeStore = defineStore({
   actions: {
     async fetchRecipes() {
       try {
-        const data = await axios.get("/Recipe");
-        this.recipes = data.data;
+        const { data } = await axios.get("/Recipe");
+        const recipes = data.map(function (recipe: Source) {
+          return recipeMapper.map(recipe);
+        });
+        this.recipes = recipes;
       } catch (error) {
         console.log(error);
       }
