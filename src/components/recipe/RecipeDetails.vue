@@ -53,4 +53,19 @@ defineProps<{
 .instructions {
   flex: 2;
 }
+
+@media screen and (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .content {
+    flex-direction: column;
+  }
+
+  .recipe {
+    padding: 10px;
+  }
+}
 </style>

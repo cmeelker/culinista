@@ -92,4 +92,11 @@ const checkboxes = ref(props.ingredients.map((_) => false));
 .name {
   flex: 3;
 }
+
+@media screen and (max-width: 600px) {
+  .container {
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+}
 </style>

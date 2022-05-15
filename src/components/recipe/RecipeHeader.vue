@@ -78,4 +78,18 @@ h3 {
     max-width: 30px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  h3 {
+    font-size: 25px;
+    margin: 0px;
+    line-height: 1.8rem;
+  }
+
+  .image {
+    img {
+      margin-bottom: 20px;
+    }
+  }
+}
 </style>
