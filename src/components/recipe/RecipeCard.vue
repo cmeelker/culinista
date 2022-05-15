@@ -3,13 +3,13 @@
     <div class="container-card">
       <div class="image"><img src="@/assets/food.jpg" /></div>
       <div class="labels">
-        <div class="label" v-for="label in props.recipe.labels" :key="label">
-          <q-badge rounded color="" :label="label" />
+        <div class="label">
+          <q-badge rounded color="" :label="props.recipe.labels" />
         </div>
       </div>
       <div class="title-row">
         <div class="title">{{ props.recipe.title }}</div>
-        <div class="logo"><img src="@/assets/ah-logo.png" /></div>
+        <div class="logo"><img :src="recipeLogo" /></div>
       </div>
     </div>
   </div>
@@ -21,6 +21,8 @@ import type { Recipe } from "@/models/Recipe";
 const props = defineProps<{
   recipe: Recipe;
 }>();
+
+const recipeLogo = `src/assets/source-logos/${props.recipe.source}.png`;
 </script>
 
 <style lang="scss" scoped>
@@ -28,6 +30,7 @@ const props = defineProps<{
 .recipe {
   :hover {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    cursor: pointer;
   }
 }
 
@@ -83,7 +86,7 @@ const props = defineProps<{
   flex: 1;
   margin-left: 5px;
   img {
-    max-width: 100%;
+    max-width: 90%;
   }
 }
 </style>

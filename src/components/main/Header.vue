@@ -6,7 +6,7 @@
           <q-icon name="ion-menu" size="md" />
         </q-btn>
       </div>
-      <div class="logo">
+      <div class="logo" @click="router.push('/')">
         <h4>Culinista</h4>
       </div>
     </div>
@@ -27,6 +27,8 @@
 </template>
 
 <script setup lang="ts">
+import router from "@/router/index";
+
 function toggleMenu() {
   const x = document.getElementById("menu-section");
 
@@ -64,6 +66,9 @@ function toggleMenu() {
 }
 
 .logo {
+  :hover {
+    cursor: pointer;
+  }
   h4 {
     font-weight: 800;
     text-transform: uppercase;

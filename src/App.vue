@@ -7,3 +7,9 @@
 <script setup lang="ts">
 import AppLayout from "@/components/main/AppLayout.vue";
 </script>
+
+<style lang="scss">
+.desktop {
+  min-height: 90%;
+}
+</style>
