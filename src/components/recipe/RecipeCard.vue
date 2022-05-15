@@ -22,7 +22,7 @@ const props = defineProps<{
   recipe: Recipe;
 }>();
 
-const recipeLogo = `src/assets/source-logos/${props.recipe.source}.png`;
+const recipeLogo = `src/assets/${props.recipe.source}.jpg`;
 </script>
 
 <style lang="scss" scoped>

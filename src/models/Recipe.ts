@@ -2,7 +2,6 @@ import { createMapper } from "@jeroenhuinink/tsmapper";
 import { Label } from "./Label";
 import { Source } from "@/models/Source";
 
-//export type Recipe = ReturnType<typeof recipeMapper.map>;
 export type Recipe = {
   id: number;
   title: string;
@@ -18,6 +17,7 @@ export type Recipe = {
 };
 
 export type IngredientUnit = ReturnType<typeof ingredientsMapper.map>;
+export type ExternalRecipe = ReturnType<typeof recipeMapper.map>;
 
 const ingredientsMapper = createMapper("IngredientsMapper")
   .field("name", { type: "string" })
@@ -41,6 +41,17 @@ export const recipeMapper = createMapper("RecipeMapper")
   })
   .field("instructions", {
     type: "string",
-    map: (val: unknown) => (val as string).split(";"),
   })
   .field("source", { type: "enum", enum: Object.values(Source) });
+
+export function mapToInternalRecipe(recipe: ExternalRecipe): Recipe {
+  return {
+    id: recipe.id,
+    title: recipe.title,
+    labels: recipe.labels,
+    servings: recipe.servings,
+    ingredients: recipe.ingredients,
+    instructions: recipe.instructions.split(";"),
+    source: recipe.source,
+  };
+}

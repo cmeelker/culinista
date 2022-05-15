@@ -1,7 +1,11 @@
 import { defineStore } from "pinia";
 import axios from "@/services/ApiClient";
 
-import { recipeMapper, type Recipe } from "@/models/Recipe";
+import {
+  mapToInternalRecipe,
+  recipeMapper,
+  type Recipe,
+} from "@/models/Recipe";
 import type { Source } from "@jeroenhuinink/tsmapper";
 
 interface State {
@@ -38,7 +42,7 @@ export const useRecipeStore = defineStore({
       try {
         const { data } = await axios.get(`/Recipe/${id}`);
         const recipe = recipeMapper.map(data);
-        this.recipe = recipe;
+        this.recipe = mapToInternalRecipe(recipe);
       } catch (error) {
         this.error = error as string;
       }
