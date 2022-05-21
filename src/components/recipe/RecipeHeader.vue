@@ -11,7 +11,7 @@
       <div class="source-title">
         {{ toDisplayName(recipe.source as string) }}
       </div>
-      <div class="source-logo"><img :src="recipeLogo" /></div>
+      <div class="source-logo"><img src="@/assets/AH.png" /></div>
     </div>
   </div>
 </template>
@@ -20,11 +20,9 @@
 import { toDisplayName } from "@/models/Source";
 import type { Recipe } from "@/models/Recipe";
 
-const props = defineProps<{
+defineProps<{
   recipe: Recipe;
 }>();
-
-const recipeLogo = `../src/assets/${props.recipe.source}.jpg`;
 </script>
 
 <style scoped lang="scss">

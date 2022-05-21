@@ -9,7 +9,7 @@
       </div>
       <div class="title-row">
         <div class="title">{{ props.recipe.title }}</div>
-        <div class="logo"><img :src="recipeLogo" /></div>
+        <div class="logo"><img src="@/assets/AH.png" /></div>
       </div>
     </div>
   </div>
@@ -21,8 +21,6 @@ import type { Recipe } from "@/models/Recipe";
 const props = defineProps<{
   recipe: Recipe;
 }>();
-
-const recipeLogo = `src/assets/${props.recipe.source}.jpg`;
 </script>
 
 <style lang="scss" scoped>
