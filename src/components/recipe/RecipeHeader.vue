@@ -1,5 +1,5 @@
 <template>
-  <div class="image"><img src="@/assets/food.jpg" /></div>
+  <div class="image"><img :src="recipe.image" /></div>
   <div class="title-area">
     <div class="title">
       <h3>{{ recipe.title }}</h3>
@@ -9,7 +9,9 @@
     </div>
     <div class="source">
       <div class="source-title">
-        {{ toDisplayName(recipe.source as string) }}
+        <a :href="recipe.url" target="_blank">
+          {{ toDisplayName(recipe.source as string) }}</a
+        >
       </div>
       <div class="source-logo"><img src="@/assets/AH.png" /></div>
     </div>

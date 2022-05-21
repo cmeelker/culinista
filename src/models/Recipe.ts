@@ -14,6 +14,8 @@ export type Recipe = {
   })[];
   instructions: string[];
   source: string | Source.AH;
+  url: string;
+  image: string;
 };
 
 export type IngredientUnit = ReturnType<typeof ingredientsMapper.map>;
@@ -42,7 +44,13 @@ export const recipeMapper = createMapper("RecipeMapper")
   .field("instructions", {
     type: "string",
   })
-  .field("source", { type: "enum", enum: Object.values(Source) });
+  .field("source", { type: "enum", enum: Object.values(Source) })
+  .field("url", {
+    type: "string",
+  })
+  .field("image", {
+    type: "string",
+  });
 
 export function mapToInternalRecipe(recipe: ExternalRecipe): Recipe {
   return {
@@ -53,5 +61,7 @@ export function mapToInternalRecipe(recipe: ExternalRecipe): Recipe {
     ingredients: recipe.ingredients,
     instructions: recipe.instructions.split(";"),
     source: recipe.source,
+    url: recipe.url,
+    image: recipe.image,
   };
 }

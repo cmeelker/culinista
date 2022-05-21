@@ -1,7 +1,7 @@
 <template>
   <div class="recipe">
     <div class="container-card">
-      <div class="image"><img src="@/assets/food.jpg" /></div>
+      <div class="image"><img :src="recipe.image" /></div>
       <div class="labels">
         <div class="label">
           <q-badge rounded color="" :label="props.recipe.labels" />
