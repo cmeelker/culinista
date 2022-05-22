@@ -1,6 +1,9 @@
 <template>
   <h6 v-if="error">{{ error }}</h6>
-  <div v-if="recipe">
+  <div v-if="loading">
+    <LoadingSpinner />
+  </div>
+  <div v-else>
     <RecipeDetails :recipe="recipe" />
   </div>
 </template>
@@ -10,8 +13,9 @@ import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
 import { useRecipeStore } from "@/stores/recipe";
 import RecipeDetails from "@/components/recipe/RecipeDetails.vue";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 
-const { recipe, error } = storeToRefs(useRecipeStore());
+const { recipe, loading, error } = storeToRefs(useRecipeStore());
 
 const route = useRoute();
 const id = +route.params.id;

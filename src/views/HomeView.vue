@@ -1,8 +1,14 @@
 <template>
-  <div class="home">
-    <div class="recipe-card-container">
-      <div v-for="(recipe, i) in recipeStore.recipes" :key="i">
-        <RecipeCard @click="openRecipe(recipe.id)" :recipe="recipe" />
+  <h6 v-if="error">{{ error }}</h6>
+  <div v-if="loading">
+    <LoadingSpinner />
+  </div>
+  <div v-else>
+    <div class="home">
+      <div class="recipe-card-container">
+        <div v-for="(recipe, i) in recipes" :key="i">
+          <RecipeCard @click="openRecipe(recipe.id)" :recipe="recipe" />
+        </div>
       </div>
     </div>
   </div>
@@ -12,6 +18,10 @@
 import RecipeCard from "@/components/recipe/RecipeCard.vue";
 import { useRecipeStore } from "@/stores/recipe";
 import router from "@/router/index";
+import { storeToRefs } from "pinia";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
+
+const { recipes, loading, error } = storeToRefs(useRecipeStore());
 
 const recipeStore = useRecipeStore();
 recipeStore.fetchRecipes();
