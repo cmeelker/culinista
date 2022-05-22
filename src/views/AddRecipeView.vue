@@ -99,6 +99,11 @@ p {
   margin: 0px;
 }
 
+.error {
+  color: red;
+  font-size: 11px;
+}
+
 .button {
   background: #f2cc8f;
   margin: 5px 0px;

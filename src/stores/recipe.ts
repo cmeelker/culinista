@@ -55,7 +55,7 @@ export const useRecipeStore = defineStore({
         const { data } = await axios.post("/Crawler", url);
         id = data;
       } catch (error) {
-        this.error = error as string;
+        this.error = "Het lijkt er op dat je geen geldige URL hebt ingevuld";
       }
       this.loading = false;
       return id;
