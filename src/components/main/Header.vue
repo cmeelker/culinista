@@ -6,7 +6,7 @@
           <q-icon name="ion-menu" size="md" />
         </q-btn>
       </div>
-      <div class="logo" @click="router.push('/')">
+      <div class="logo" @click="router.push('/'), hideMenu()">
         <h4>Culinista</h4>
       </div>
     </div>
@@ -14,8 +14,10 @@
       <div class="menu">
         <nav class="stroke">
           <ul>
-            <li><a href="#">Recept toevoegen</a></li>
-            <li><a href="#">Contact</a></li>
+            <li @click="router.push('/addRecipe'), hideMenu()">
+              Recept toevoegen
+            </li>
+            <li>Contact</li>
           </ul>
         </nav>
       </div>
@@ -36,6 +38,16 @@ function toggleMenu() {
     if (x.className === "menu-section") {
       x.className += "-hide";
     } else {
+      x.className = "menu-section";
+    }
+  }
+}
+
+function hideMenu() {
+  const x = document.getElementById("menu-section");
+  if (x) {
+    x.className === "menu-section-hide";
+    {
       x.className = "menu-section";
     }
   }
@@ -139,27 +151,28 @@ nav ul {
 nav ul li {
   margin-right: 20px;
 }
-nav ul li a {
+nav ul li {
   padding: 10px;
-  margin: 0px 10px 0px 10px;
+  margin: 0px 20px 0px 10px;
   text-decoration: none;
   color: rgb(117, 117, 117);
   font-weight: 800;
   text-transform: uppercase;
 }
-nav ul li a,
-nav ul li a:after,
-nav ul li a:before {
+nav ul li,
+nav ul li:after,
+nav ul li:before {
   transition: all 0.5s;
 }
-nav ul li a:hover {
+nav ul li:hover {
   color: $dark;
 }
 
-nav.stroke ul li a {
+nav.stroke ul li {
   position: relative;
+  cursor: pointer;
 }
-nav.stroke ul li a:after {
+nav.stroke ul li:after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -171,7 +184,7 @@ nav.stroke ul li a:after {
   background: $accent;
   height: 2px;
 }
-nav.stroke ul li a:hover:after {
+nav.stroke ul li:hover:after {
   width: 100%;
 }
 </style>

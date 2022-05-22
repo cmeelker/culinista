@@ -4,7 +4,7 @@
     <LoadingSpinner />
   </div>
   <div v-else>
-    <RecipeDetails :recipe="recipe" />
+    <RecipeDetails v-if="recipe" :recipe="recipe" />
   </div>
 </template>
 
