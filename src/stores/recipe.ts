@@ -26,6 +26,7 @@ export const useRecipeStore = defineStore({
   actions: {
     async fetchRecipes() {
       this.loading = true;
+      this.error = null;
       try {
         const { data } = await axios.get("/Recipe");
         const recipes = data.map(function (recipe: Source) {
@@ -39,6 +40,7 @@ export const useRecipeStore = defineStore({
     },
     async fetchRecipe(id: number) {
       this.loading = true;
+      this.error = null;
       try {
         const { data } = await axios.get(`/Recipe/${id}`);
         const recipe = recipeMapper.map(data);
