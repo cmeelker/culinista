@@ -21,8 +21,10 @@
           flat
           :loading="loading"
           label="Recept Toevoegen"
+          @click="addRecipe()"
         />
       </div>
+      <div class="error">{{ error }}</div>
       <div class="sources">
         <p>Ondersteunde websites</p>
         <div class="logos"><img class="logo" src="@/assets/AH.png" /></div>
@@ -36,10 +38,24 @@
 </template>
 
 <script setup lang="ts">
+import router from "@/router";
+import { useRecipeStore } from "@/stores/recipe";
+import { storeToRefs } from "pinia";
 import { ref } from "vue";
 
 const url = ref("");
 const loading = ref(false);
+const { error } = storeToRefs(useRecipeStore());
+const recipeStore = useRecipeStore();
+
+async function addRecipe() {
+  loading.value = true;
+  const id = await recipeStore.addRecipe(url.value);
+  loading.value = false;
+  if (id) {
+    router.push(`/recipe/${id}`);
+  }
+}
 </script>
 
 <style scoped lang="scss">

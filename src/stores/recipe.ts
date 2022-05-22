@@ -48,5 +48,17 @@ export const useRecipeStore = defineStore({
       }
       this.loading = false;
     },
+    async addRecipe(url: string): Promise<number | null> {
+      this.loading = true;
+      let id: number | null = null;
+      try {
+        const { data } = await axios.post("/Crawler", url);
+        id = data;
+      } catch (error) {
+        this.error = error as string;
+      }
+      this.loading = false;
+      return id;
+    },
   },
 });
