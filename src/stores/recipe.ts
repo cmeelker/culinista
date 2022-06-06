@@ -62,5 +62,14 @@ export const useRecipeStore = defineStore({
       this.loading = false;
       return id;
     },
+    async deleteRecipe(id: number) {
+      this.loading = true;
+      try {
+        await axios.delete(`/Recipe/${id}`);
+      } catch (error) {
+        this.error = "Het verwijderen is niet gelukt";
+      }
+      this.loading = false;
+    },
   },
 });

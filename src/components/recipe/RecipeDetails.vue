@@ -14,6 +14,15 @@
         <RecipeInstructions :instructions="recipe.instructions" />
       </div>
     </div>
+    <div class="footer">
+      <q-btn
+        outline
+        style="color: #dc493a"
+        label="Recept verwijderen"
+        :loading="loading"
+        @click="deleteRecipe()"
+      />
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -22,10 +31,37 @@ import type { Recipe } from "../../models/Recipe";
 import RecipeIngredients from "./RecipeIngredients.vue";
 import RecipeInstructions from "./RecipeInstructions.vue";
 import RecipeHeader from "./RecipeHeader.vue";
+import { useQuasar } from "quasar";
+import router from "@/router";
+import { useRecipeStore } from "@/stores/recipe";
+import { storeToRefs } from "pinia";
 
-defineProps<{
+const props = defineProps<{
   recipe: Recipe;
 }>();
+
+const $q = useQuasar();
+const recipeStore = useRecipeStore();
+
+const { loading } = storeToRefs(useRecipeStore());
+
+function deleteRecipe() {
+  $q.dialog({
+    title: "Bevestigen",
+    message: "Weet je zeker dat je dit recept wilt verwijderen?",
+    persistent: true,
+    ok: { label: "Oke", flat: true, color: "black" },
+    cancel: { label: "Annuleer", flat: true, color: "black" },
+  }).onOk(async () => {
+    await recipeStore.deleteRecipe(props.recipe.id);
+
+    $q.notify({
+      message: "Recept is verwijderd",
+      color: "secondary",
+    });
+    router.push(`/`);
+  });
+}
 </script>
 
 <style lang="scss" scoped>
@@ -52,6 +88,12 @@ defineProps<{
 
 .instructions {
   flex: 2;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 600px) {
