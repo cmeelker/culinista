@@ -8,7 +8,7 @@
         <q-icon name="ion-add" @click="$emit('showEditComponent')" />
         Tag toevoegen
       </q-badge>
-      <q-tooltip> Tags wijzigen</q-tooltip>
+      <q-tooltip> Tags toevoegen</q-tooltip>
     </div>
     <div v-else class="edit">
       <q-icon name="ion-create" @click="$emit('showEditComponent')" />

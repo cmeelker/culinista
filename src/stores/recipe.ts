@@ -67,7 +67,7 @@ export const useRecipeStore = defineStore({
       return id;
     },
     async editTags(id: number, tags: Tag[]): Promise<void> {
-      const tagString = tags.toString();
+      const tagString = tags?.length > 0 ? tags.toString() : null;
 
       try {
         await axios.patch(`/Recipe/${id}`, { tags: tagString });

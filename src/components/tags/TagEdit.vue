@@ -26,7 +26,7 @@
 
 <script lang="ts" setup>
 import { useRecipeStore } from "@/stores/recipe";
-import VueTagsInput from "@sipec/vue3-tags-input";
+import { VueTagsInput } from "@sipec/vue3-tags-input";
 import { Tag } from "@/models/Tag";
 import { ref } from "vue";
 
@@ -54,13 +54,11 @@ const autocompleteItems = ref(
 );
 
 async function saveTags() {
-  if (tags.value.length > 0) {
-    const tagList = tags.value.map((tag) => {
-      return tag.text;
-    });
+  const tagList = tags.value.map((tag) => {
+    return tag.text;
+  });
 
-    await recipeStore.editTags(props.recipeId, tagList);
-  }
+  await recipeStore.editTags(props.recipeId, tagList);
 }
 </script>
 

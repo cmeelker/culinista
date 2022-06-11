@@ -64,7 +64,7 @@ export function mapToInternalRecipe(recipe: ExternalRecipe): Recipe {
   return {
     id: recipe.id,
     title: recipe.title,
-    tags: recipe.tags as Tag,
+    tags: recipe.tags as Tag[],
     servings: recipe.servings,
     ingredients: recipe.ingredients,
     instructions: recipe.instructions.split(";"),
