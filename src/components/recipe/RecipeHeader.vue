@@ -7,12 +7,14 @@
     <div class="tags">
       <TagList
         :class="{ hide: showEditComponent }"
-        :tags="[Tag.Gezond, Tag.Bakken]"
+        :tags="recipe.tags ?? []"
         @show-edit-component="showEditComponent = true"
       />
       <TagEdit
         :class="{ hide: !showEditComponent }"
-        @save-tags="showEditComponent = false"
+        :recipe-id="recipe.id"
+        :tags="recipe.tags ?? []"
+        @close-edit-component="showEditComponent = false"
       />
     </div>
     <div class="source">
@@ -31,7 +33,6 @@ import { toDisplayName } from "@/models/Source";
 import TagList from "@/components/tags/TagList.vue";
 import TagEdit from "@/components/tags/TagEdit.vue";
 import type { Recipe } from "@/models/Recipe";
-import { Tag } from "@/models/Tag";
 import { ref } from "vue";
 
 defineProps<{

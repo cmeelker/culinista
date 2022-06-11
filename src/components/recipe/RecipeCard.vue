@@ -4,7 +4,13 @@
       <div class="image"><img :src="recipe.image" /></div>
       <div class="labels">
         <div class="label">
-          <q-badge rounded color="" :label="props.recipe.labels" />
+          <q-badge
+            v-for="tag in props.recipe.tags"
+            :key="tag"
+            rounded
+            color=""
+            :label="tag"
+          />
         </div>
       </div>
       <div class="title-row">
@@ -57,7 +63,7 @@ const props = defineProps<{
 .labels {
   height: 30px;
   display: flex;
-  margin: 10px 10px 5px 10px;
+  margin: 10px 10px 5px 5px;
   .label {
     margin-right: 7px;
     padding: 0px;
@@ -65,6 +71,7 @@ const props = defineProps<{
       color: black;
       background-color: $light;
       padding: 5px 20px 5px 20px;
+      margin-right: 10px;
     }
   }
 }

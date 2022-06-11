@@ -5,7 +5,7 @@ import { Source } from "@/models/Source";
 export type Recipe = {
   id: number;
   title: string;
-  tags: Tag | undefined;
+  tags: Tag[];
   servings: number;
   ingredients: ({
     name: string;
@@ -18,6 +18,19 @@ export type Recipe = {
   image: string;
 };
 
+function tagMapper(tags: any): Tag[] | void {
+  if (tags != null) {
+    const tagList = tags.split(",");
+    tagList.map((tag: any) => {
+      if (tag in Tag) {
+        return Tag[tag] as unknown as Tag;
+      }
+    });
+
+    return tagList;
+  }
+}
+
 export type IngredientUnit = ReturnType<typeof ingredientsMapper.map>;
 export type ExternalRecipe = ReturnType<typeof recipeMapper.map>;
 
@@ -28,13 +41,7 @@ const ingredientsMapper = createMapper("IngredientsMapper")
 export const recipeMapper = createMapper("RecipeMapper")
   .field("id", { type: "number" })
   .field("title", { type: "string" })
-  // TO DO: List of enums
-  .field("tags", {
-    type: "enum",
-    optional: true,
-    default: Tag.Gezond,
-    enum: Object.values(Tag),
-  })
+  .field("tags", { map: tagMapper, optional: true })
   .field("servings", {
     type: "number",
   })

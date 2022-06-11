@@ -11,20 +11,39 @@
       />
     </div>
     <div class="save">
-      <q-btn flat color="brand" @click="$emit('saveTags')">Opslaan</q-btn>
+      <q-btn
+        flat
+        color="brand"
+        @click="
+          $emit('closeEditComponent');
+          saveTags();
+        "
+        >Opslaan</q-btn
+      >
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { useRecipeStore } from "@/stores/recipe";
 import VueTagsInput from "@sipec/vue3-tags-input";
 import { Tag } from "@/models/Tag";
 import { ref } from "vue";
 
-defineEmits(["saveTags"]);
+defineEmits(["closeEditComponent"]);
+const props = defineProps<{
+  recipeId: number;
+  tags: Tag[];
+}>();
+
+const recipeStore = useRecipeStore();
 
 const tag = ref("");
-const tags = ref(["Snel"]);
+const tags = ref(
+  props.tags.map((tag) => {
+    return { text: tag };
+  })
+);
 
 const autocompleteItems = ref(
   Object.keys(Tag)
@@ -33,6 +52,16 @@ const autocompleteItems = ref(
       return { text: tag };
     })
 );
+
+async function saveTags() {
+  if (tags.value.length > 0) {
+    const tagList = tags.value.map((tag) => {
+      return tag.text;
+    });
+
+    await recipeStore.editTags(props.recipeId, tagList);
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -59,6 +88,11 @@ const autocompleteItems = ref(
   }
   .ti-input {
     border: none;
+  }
+
+  .ti-item.ti-selected-item {
+    background: $background;
+    color: black;
   }
 }
 </style>

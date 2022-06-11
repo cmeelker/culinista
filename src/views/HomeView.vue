@@ -1,5 +1,5 @@
 <template>
-  <h6 v-if="error">{{ error }}</h6>
+  <h6 v-if="error">Er is iets mis gegaan :(</h6>
   <div v-if="loading">
     <LoadingSpinner />
   </div>

@@ -17,7 +17,7 @@
     <div class="footer">
       <q-btn
         outline
-        style="color: #dc493a"
+        color="brand"
         label="Recept verwijderen"
         :loading="loading"
         @click="deleteRecipe()"
@@ -50,7 +50,7 @@ function deleteRecipe() {
     title: "Bevestigen",
     message: "Weet je zeker dat je dit recept wilt verwijderen?",
     persistent: true,
-    ok: { label: "Oke", flat: true, color: "black" },
+    ok: { label: "Oke", flat: true, color: "brand" },
     cancel: { label: "Annuleer", flat: true, color: "black" },
   }).onOk(async () => {
     await recipeStore.deleteRecipe(props.recipe.id);
