@@ -55,6 +55,8 @@ function deleteRecipe() {
   }).onOk(async () => {
     await recipeStore.deleteRecipe(props.recipe.id);
 
+    // TO DO: Error afhandeling
+
     $q.notify({
       message: "Recept is verwijderd",
       color: "secondary",

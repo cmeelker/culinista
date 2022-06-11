@@ -1,1 +1,8 @@
 @import "./quasar.variables.scss";
+
+.text-brand {
+  color: $primary !important;
+}
+.bg-brand {
+  background: $primary !important;
+}

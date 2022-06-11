@@ -1,11 +1,11 @@
 import { createMapper } from "@jeroenhuinink/tsmapper";
-import { Label } from "./Label";
+import { Tag } from "./Tag";
 import { Source } from "@/models/Source";
 
 export type Recipe = {
   id: number;
   title: string;
-  labels: Label | undefined;
+  tags: Tag | undefined;
   servings: number;
   ingredients: ({
     name: string;
@@ -28,11 +28,12 @@ const ingredientsMapper = createMapper("IngredientsMapper")
 export const recipeMapper = createMapper("RecipeMapper")
   .field("id", { type: "number" })
   .field("title", { type: "string" })
-  .field("labels", {
+  // TO DO: List of enums
+  .field("tags", {
     type: "enum",
     optional: true,
-    default: Label.Fast,
-    enum: Object.values(Label),
+    default: Tag.Gezond,
+    enum: Object.values(Tag),
   })
   .field("servings", {
     type: "number",
@@ -56,7 +57,7 @@ export function mapToInternalRecipe(recipe: ExternalRecipe): Recipe {
   return {
     id: recipe.id,
     title: recipe.title,
-    labels: recipe.labels,
+    tags: recipe.tags as Tag,
     servings: recipe.servings,
     ingredients: recipe.ingredients,
     instructions: recipe.instructions.split(";"),

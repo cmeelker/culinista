@@ -4,8 +4,16 @@
     <div class="title">
       <h3>{{ recipe.title }}</h3>
     </div>
-    <div class="labels">
-      <q-badge rounded color="" :label="recipe.labels" />
+    <div class="tags">
+      <TagList
+        :class="{ hide: showEditComponent }"
+        :tags="[Tag.Gezond, Tag.Bakken]"
+        @show-edit-component="showEditComponent = true"
+      />
+      <TagEdit
+        :class="{ hide: !showEditComponent }"
+        @save-tags="showEditComponent = false"
+      />
     </div>
     <div class="source">
       <div class="source-title">
@@ -20,15 +28,25 @@
 
 <script lang="ts" setup>
 import { toDisplayName } from "@/models/Source";
+import TagList from "@/components/tags/TagList.vue";
+import TagEdit from "@/components/tags/TagEdit.vue";
 import type { Recipe } from "@/models/Recipe";
+import { Tag } from "@/models/Tag";
+import { ref } from "vue";
 
 defineProps<{
   recipe: Recipe;
 }>();
+
+const showEditComponent = ref(false);
 </script>
 
 <style scoped lang="scss">
 @import "@/styles/quasar.variables.scss";
+
+.hide {
+  display: none;
+}
 
 .image {
   border-radius: 10px;
@@ -56,13 +74,11 @@ h3 {
   font-weight: 500;
 }
 
-.labels {
+.tags {
   margin: 5px;
-  .q-badge {
-    color: black;
-    background-color: $light;
-    padding: 5px 20px 5px 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .source {
