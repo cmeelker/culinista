@@ -33,6 +33,7 @@ defineEmits(["showEditComponent"]);
 .content {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .tags {
@@ -41,6 +42,7 @@ defineEmits(["showEditComponent"]);
     background-color: $light;
     padding: 5px 20px 5px 20px;
     margin-right: 10px;
+    margin-top: 10px;
   }
 }
 
@@ -49,6 +51,10 @@ defineEmits(["showEditComponent"]);
   width: 30px;
   &:hover {
     cursor: pointer;
+  }
+
+  .q-icon {
+    margin-top: 10px;
   }
 }
 
