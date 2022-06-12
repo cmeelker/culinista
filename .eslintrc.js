@@ -19,7 +19,7 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
+    //"no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "warn",
     "prettier/prettier": ["error", { endOfLine: "auto" }],
     "no-unused-vars": "off",

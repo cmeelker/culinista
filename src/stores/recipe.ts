@@ -8,10 +8,12 @@ import {
 } from "@/models/Recipe";
 import type { Source } from "@jeroenhuinink/tsmapper";
 import type { Tag } from "@/models/Tag";
+import filterRecipes from "@/util/filter";
 
 interface State {
   recipe: Recipe | null;
   recipes: Recipe[];
+  filteredRecipes: Recipe[];
   loading: boolean;
   error: string | null;
 }
@@ -21,10 +23,14 @@ export const useRecipeStore = defineStore({
   state: (): State => ({
     recipe: null,
     recipes: [],
+    filteredRecipes: [],
     loading: true,
     error: null,
   }),
   actions: {
+    filterRecipes(filter: string): void {
+      this.filteredRecipes = filterRecipes(filter.toLowerCase(), this.recipes);
+    },
     async fetchRecipes() {
       this.loading = true;
       this.error = null;
@@ -34,6 +40,7 @@ export const useRecipeStore = defineStore({
           return recipeMapper.map(recipe);
         });
         this.recipes = recipes;
+        this.filteredRecipes = recipes;
       } catch (error) {
         this.error = error as string;
         console.log(error);

@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="tags-edit-content">
     <div class="tags-input">
       <vue-tags-input
         v-model="tag"
@@ -62,8 +62,10 @@ async function saveTags() {
 }
 </script>
 
-<style scoped lang="scss">
-.content {
+<style lang="scss">
+@import "@/styles/quasar.variables.scss";
+
+.tags-edit-content {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #cccccc;
@@ -71,10 +73,6 @@ async function saveTags() {
   align-items: flex-end;
   max-width: 500px;
 }
-</style>
-
-<style lang="scss">
-@import "@/styles/quasar.variables.scss";
 
 .vue-tags-input {
   .ti-tag {

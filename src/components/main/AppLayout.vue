@@ -39,10 +39,16 @@ window.onscroll = function () {
   transition: top 0.4s;
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
 .router-view {
-  margin-top: 80px;
-  margin-right: 20px;
+  flex: 4;
   margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 80px;
   background-color: white;
 }
 </style>

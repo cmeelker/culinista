@@ -5,7 +5,7 @@
       <div class="labels">
         <div class="label">
           <q-badge
-            v-for="tag in props.recipe.tags"
+            v-for="tag in props.recipe.tags.slice(0, 3)"
             :key="tag"
             rounded
             color=""
