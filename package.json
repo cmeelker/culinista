@@ -9,6 +9,7 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@auth0/auth0-vue": "^1.0.1",
     "@jeroenhuinink/tsmapper": "^0.0.13",
     "@quasar/extras": "^1.13.5",
     "@sipec/vue3-tags-input": "^3.0.4",

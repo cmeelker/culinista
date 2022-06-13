@@ -14,15 +14,29 @@
       <div class="menu">
         <nav class="stroke">
           <ul>
+            <li @click="router.push('/'), hideMenu()">Favorieten</li>
             <li @click="router.push('/addRecipe'), hideMenu()">
               Recept toevoegen
             </li>
-            <li>Contact</li>
           </ul>
         </nav>
       </div>
       <div class="login">
-        <q-btn class="login-button" outline label="Log in" />
+        {{ user.id }}
+        <q-btn
+          v-if="isAuthenticated"
+          class="login-button"
+          outline
+          label="Logout"
+          @click="logoutUser"
+        />
+        <q-btn
+          v-else
+          class="login-button"
+          outline
+          label="Log in"
+          @click="login"
+        />
       </div>
     </div>
   </div>
@@ -30,6 +44,15 @@
 
 <script setup lang="ts">
 import router from "@/router/index";
+import { useAuth0 } from "@auth0/auth0-vue";
+
+const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+function login() {
+  loginWithRedirect();
+}
+function logoutUser() {
+  logout({ returnTo: window.location.origin });
+}
 
 function toggleMenu() {
   const x = document.getElementById("menu-section");
