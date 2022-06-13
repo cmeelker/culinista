@@ -37,18 +37,16 @@ window.onscroll = function () {
   margin-right: 20px;
   border-bottom: 1px solid $dark;
   transition: top 0.4s;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
+  z-index: 2;
 }
 
 .router-view {
-  flex: 4;
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 80px;
+  padding-top: 20px;
   background-color: white;
+  position: relative;
+  z-index: 1;
 }
 </style>

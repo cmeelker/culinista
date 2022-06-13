@@ -121,12 +121,13 @@ function hideMenu() {
 
   nav ul {
     flex-direction: column;
-    padding-left: 5px;
     margin-top: 0px;
+    padding-left: 0 !important;
 
     li {
-      margin-right: 2px !important;
-      padding: 15px;
+      margin-right: 0 !important;
+      margin-left: 0 !important;
+      padding: 15px !important;
       margin-bottom: -1px;
       border-top: 1px solid #d4d4d3;
       border-bottom: 1px solid #d4d4d3;

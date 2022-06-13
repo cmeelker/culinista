@@ -5,13 +5,13 @@
     </div>
     <div v-if="tags.length == 0" class="add">
       <q-badge @click="$emit('showEditComponent')">
-        <q-icon name="ion-add" @click="$emit('showEditComponent')" />
+        <q-icon name="ion-add" size="xs" @click="$emit('showEditComponent')" />
         Tag toevoegen
       </q-badge>
       <q-tooltip> Tags toevoegen</q-tooltip>
     </div>
     <div v-else class="edit">
-      <q-icon name="ion-create" @click="$emit('showEditComponent')" />
+      <q-icon name="ion-create" size="xs" @click="$emit('showEditComponent')" />
       <q-tooltip> Tags wijzigen</q-tooltip>
     </div>
   </div>

@@ -5,7 +5,7 @@
       <div class="labels">
         <div class="label">
           <q-badge
-            v-for="tag in props.recipe.tags.slice(0, 3)"
+            v-for="tag in tags"
             :key="tag"
             rounded
             color=""
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="title-row">
-        <div class="title">{{ props.recipe.title }}</div>
+        <div class="title">{{ recipe.title }}</div>
         <div class="logo"><img src="@/assets/AH.png" /></div>
       </div>
     </div>
@@ -23,10 +23,17 @@
 
 <script setup lang="ts">
 import type { Recipe } from "@/models/Recipe";
+import { computed } from "@vue/reactivity";
 
 const props = defineProps<{
   recipe: Recipe;
 }>();
+
+const tags = computed(() => {
+  return props.recipe.tags.length > 2
+    ? props.recipe.tags.slice(0, 2)
+    : props.recipe.tags;
+});
 </script>
 
 <style lang="scss" scoped>

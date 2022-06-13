@@ -11,6 +11,9 @@
       <div v-else>
         <div class="home">
           <div class="recipe-card-container">
+            <div v-if="noSearchResult" class="no-filtered-recipes">
+              Helaas! Er zijn geen zoekresultaten.
+            </div>
             <div v-for="(recipe, i) in filteredRecipes" :key="i">
               <RecipeCard @click="openRecipe(recipe.id)" :recipe="recipe" />
             </div>
@@ -28,8 +31,15 @@ import router from "@/router/index";
 import { storeToRefs } from "pinia";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import SearchAndFilter from "@/components/main/SearchAndFilter.vue";
+import { computed } from "@vue/reactivity";
 
-const { filteredRecipes, loading, error } = storeToRefs(useRecipeStore());
+const { filteredRecipes, recipes, loading, error } = storeToRefs(
+  useRecipeStore()
+);
+
+const noSearchResult = computed(() => {
+  return filteredRecipes.value.length == 0 && recipes.value.length > 0;
+});
 
 const recipeStore = useRecipeStore();
 recipeStore.fetchRecipes();
@@ -59,5 +69,9 @@ function openRecipe(id: number) {
   grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
   gap: 5px;
   margin: 10px;
+}
+
+.no-filtered-recipes {
+  margin-left: 10px;
 }
 </style>

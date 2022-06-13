@@ -109,7 +109,7 @@ function deleteRecipe() {
   }
 
   .recipe {
-    padding: 10px;
+    padding: 0 10px;
   }
 }
 </style>
