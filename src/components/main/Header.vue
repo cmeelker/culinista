@@ -22,7 +22,6 @@
         </nav>
       </div>
       <div class="login">
-        {{ user.id }}
         <q-btn
           v-if="isAuthenticated"
           class="login-button"

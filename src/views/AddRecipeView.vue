@@ -59,6 +59,7 @@ async function addRecipe() {
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/quasar.variables.scss";
 .content {
   display: flex;
   margin: 0px 20px;
@@ -105,9 +106,10 @@ p {
 }
 
 .button {
-  background: #f2cc8f;
+  background: $primary;
   margin: 5px 0px;
   width: 100%;
+  color: white;
 }
 
 .sources {

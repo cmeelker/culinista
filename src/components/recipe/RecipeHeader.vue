@@ -1,6 +1,25 @@
 <template>
   <div class="image"><img :src="recipe.image" /></div>
   <div class="title-area">
+    <div v-if="isFavorite">
+      <q-icon
+        name="ion-star"
+        size="md"
+        color="#2a3238"
+        @click="isFavorite = !isFavorite"
+      >
+        <q-tooltip :delay="1000"> Verwijder uit favorieten</q-tooltip>
+      </q-icon>
+    </div>
+    <div class="favorite-icon" v-else>
+      <q-icon
+        name="ion-star-outline"
+        size="md"
+        color="#2a3238"
+        @click="isFavorite = !isFavorite"
+        ><q-tooltip :delay="1000"> Toevoegen aan favorieten</q-tooltip>
+      </q-icon>
+    </div>
     <div class="title">
       <h3>{{ recipe.title }}</h3>
     </div>
@@ -18,12 +37,12 @@
       />
     </div>
     <div class="source">
+      <div class="source-logo"><img src="@/assets/AH.png" /></div>
       <div class="source-title">
         <a :href="recipe.url" target="_blank">
           {{ toDisplayName(recipe.source as string) }}</a
         >
       </div>
-      <div class="source-logo"><img src="@/assets/AH.png" /></div>
     </div>
   </div>
 </template>
@@ -40,6 +59,7 @@ defineProps<{
 }>();
 
 const showEditComponent = ref(false);
+const isFavorite = ref(true);
 </script>
 
 <style scoped lang="scss">
@@ -69,10 +89,13 @@ const showEditComponent = ref(false);
   justify-content: center;
   text-align: center;
 }
-
 h3 {
   margin: 10px;
   font-weight: 500;
+}
+
+.title {
+  margin-bottom: 10px;
 }
 
 .tags {
@@ -87,13 +110,27 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  a {
+    text-underline-offset: 5px;
+    color: #384789;
+  }
 }
 
 .source-logo {
-  margin-left: 5px;
+  margin-right: 10px;
   img {
     max-width: 30px;
   }
+}
+
+.q-icon {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.q-icon {
+  color: $primary;
 }
 
 @media screen and (max-width: 600px) {
@@ -107,6 +144,14 @@ h3 {
     img {
       margin-bottom: 20px;
     }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  h3 {
+    font-size: 32px;
+    margin: 0px;
+    line-height: 1.8rem;
   }
 }
 </style>

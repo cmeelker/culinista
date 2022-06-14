@@ -30,9 +30,11 @@ const props = defineProps<{
 }>();
 
 const tags = computed(() => {
-  return props.recipe.tags.length > 2
-    ? props.recipe.tags.slice(0, 2)
-    : props.recipe.tags;
+  return props.recipe.tags
+    ? props.recipe.tags.length > 2
+      ? props.recipe.tags.slice(0, 2)
+      : props.recipe.tags
+    : null;
 });
 </script>
 
