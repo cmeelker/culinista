@@ -14,7 +14,7 @@
       <div class="menu">
         <nav class="stroke">
           <ul>
-            <li @click="router.push('/'), hideMenu()">Favorieten</li>
+            <li @click="router.push('/favourite'), hideMenu()">Favorieten</li>
             <li @click="router.push('/addRecipe'), hideMenu()">
               Recept toevoegen
             </li>
@@ -45,8 +45,8 @@
 import router from "@/router/index";
 import { useAuth0 } from "@auth0/auth0-vue";
 
-const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
-function login() {
+const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+async function login() {
   loginWithRedirect();
 }
 function logoutUser() {

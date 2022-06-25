@@ -5,16 +5,18 @@ export default function filterRecipes(
   recipes: Recipe[]
 ): Recipe[] {
   return recipes.filter((recipe) => {
-    return (
-      recipe.title.toLowerCase().includes(filter) ||
-      recipe.tags.toString().toLowerCase().includes(filter) ||
-      recipe.ingredients
-        .map((ingredient) => {
-          return ingredient.name;
-        })
-        .toString()
-        .toLowerCase()
-        .includes(filter)
-    );
+    const includesTitle = recipe.title.toLowerCase().includes(filter);
+    const includesTags = recipe.tags
+      ? recipe.tags.toString().toLowerCase().includes(filter)
+      : false;
+    const includesIngredients = recipe.ingredients
+      .map((ingredient) => {
+        return ingredient.name;
+      })
+      .toString()
+      .toLowerCase()
+      .includes(filter);
+
+    return includesTitle || includesTags || includesIngredients;
   });
 }

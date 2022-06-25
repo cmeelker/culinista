@@ -6,7 +6,7 @@
         name="ion-star"
         size="md"
         color="#2a3238"
-        @click="isFavorite = !isFavorite"
+        @click="toggleFavorite()"
       >
         <q-tooltip :delay="1000"> Verwijder uit favorieten</q-tooltip>
       </q-icon>
@@ -16,7 +16,7 @@
         name="ion-star-outline"
         size="md"
         color="#2a3238"
-        @click="isFavorite = !isFavorite"
+        @click="toggleFavorite()"
         ><q-tooltip :delay="1000"> Toevoegen aan favorieten</q-tooltip>
       </q-icon>
     </div>
@@ -53,13 +53,22 @@ import TagList from "@/components/tags/TagList.vue";
 import TagEdit from "@/components/tags/TagEdit.vue";
 import type { Recipe } from "@/models/Recipe";
 import { ref } from "vue";
+import { useFavoriteStore } from "@/stores/favorite";
+import { useAuth0 } from "@auth0/auth0-vue";
 
-defineProps<{
+const props = defineProps<{
   recipe: Recipe;
 }>();
 
+const favoriteStore = useFavoriteStore();
+const { user } = useAuth0();
+
 const showEditComponent = ref(false);
 const isFavorite = ref(true);
+
+function toggleFavorite() {
+  favoriteStore.toggleFavorite(user.value.sub as string, props.recipe.id);
+}
 </script>
 
 <style scoped lang="scss">
