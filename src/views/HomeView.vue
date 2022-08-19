@@ -33,6 +33,8 @@ import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import SearchAndFilter from "@/components/main/SearchAndFilter.vue";
 import { computed } from "@vue/reactivity";
 
+// TO DO: Refactor zoals FavoriteView
+
 const { filteredRecipes, recipes, loading, error } = storeToRefs(
   useRecipeStore()
 );
