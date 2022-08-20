@@ -13,6 +13,7 @@
           v-model="url"
           placeholder="http://www.allerhande.nl/lekker-recept"
           dense
+          color="brand"
         />
       </div>
       <div>
@@ -121,7 +122,10 @@ p {
 
 .logos {
   margin-top: 10px;
+  display: flex;
+  flex-direction: row;
   .logo {
+    margin: auto;
     max-width: 30px;
   }
 }

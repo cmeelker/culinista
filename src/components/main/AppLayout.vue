@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-20 bg-background border-b-[1px] border-dark w-full fixed z-50 header-transition"
+    class="h-20 bg-background border-b-[1px] border-dark w-full fixed top-0 z-50 header-transition"
     id="main-header"
   >
     <div class="mx-auto max-w-[1400px]">
