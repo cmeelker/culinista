@@ -3,33 +3,21 @@
     <div class="header">
       <RecipeHeader :recipe="recipe" />
     </div>
-    <div class="content">
-      <div class="ingredients">
-        <RecipeIngredients
-          :ingredients="recipe.ingredients"
-          :servings="recipe.servings"
-        />
-      </div>
-      <div class="instructions">
-        <RecipeInstructions :instructions="recipe.instructions" />
-      </div>
-    </div>
     <div class="footer">
       <q-btn
         outline
-        color="brand"
         label="Recept verwijderen"
         :loading="loading"
+        color="brand"
         @click="deleteRecipe()"
       />
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import type { Recipe } from "../../models/Recipe";
+// Gaat op de schop
 
-import RecipeIngredients from "./RecipeIngredients.vue";
-import RecipeInstructions from "./RecipeInstructions.vue";
+import type { Recipe } from "../../models/Recipe";
 import RecipeHeader from "./RecipeHeader.vue";
 import { useQuasar } from "quasar";
 import router from "@/router";
@@ -80,18 +68,6 @@ function deleteRecipe() {
   margin-bottom: 40px;
 }
 
-.content {
-  display: flex;
-}
-
-.ingredients {
-  flex: 1;
-}
-
-.instructions {
-  flex: 2;
-}
-
 .footer {
   display: flex;
   justify-content: center;
@@ -102,10 +78,6 @@ function deleteRecipe() {
   .header {
     flex-direction: column;
     height: auto;
-  }
-
-  .content {
-    flex-direction: column;
   }
 
   .recipe {

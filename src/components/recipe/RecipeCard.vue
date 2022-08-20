@@ -1,22 +1,14 @@
 <template>
-  <div class="recipe">
-    <div class="container-card">
-      <div class="image"><img :src="recipe.image" /></div>
-      <div class="labels">
-        <div class="label">
-          <q-badge
-            v-for="tag in tags"
-            :key="tag"
-            rounded
-            color=""
-            :label="tag"
-          />
-        </div>
-      </div>
-      <div class="title-row">
-        <div class="title">{{ recipe.title }}</div>
-        <div class="logo"><img src="@/assets/AH.png" /></div>
-      </div>
+  <div class="hover:shadow-lg cursor-pointer h-full border-b flex">
+    <div class="h-36 overflow-hidden flex flex-col justify-center">
+      <img :src="recipe.image" />
+    </div>
+    <div class="h-6 flex mt-2.5 mr-2.5 mb-1 ml-1">
+      <q-badge v-for="tag in tags" :key="tag" rounded :label="tag" />
+    </div>
+    <div class="flex items-center m-1.5">
+      <div class="font-bold basis-5/6">{{ recipe.title }}</div>
+      <div class="basis-1/6 p-2"><img src="@/assets/AH.png" /></div>
     </div>
   </div>
 </template>
@@ -40,67 +32,11 @@ const tags = computed(() => {
 
 <style lang="scss" scoped>
 @import "@/styles/quasar.variables.scss";
-.recipe {
-  :hover {
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    cursor: pointer;
-  }
-}
 
-.container-card {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-  height: 230px;
-  border-bottom: 1px solid #eeedec;
-  :hover {
-    box-shadow: none;
-  }
-}
-
-.image {
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  img {
-    max-width: 100%;
-  }
-}
-
-.labels {
-  height: 30px;
-  display: flex;
-  margin: 10px 10px 5px 5px;
-  .label {
-    margin-right: 7px;
-    padding: 0px;
-    .q-badge {
-      color: black;
-      background-color: $light;
-      padding: 5px 20px 5px 20px;
-      margin-right: 10px;
-    }
-  }
-}
-
-.title-row {
-  margin: 0px 10px 10px 10px;
-  display: flex;
-  align-items: center;
-}
-
-.title {
-  flex: 7;
-  font-weight: bold;
-}
-
-.logo {
-  flex: 1;
-  margin-left: 5px;
-  img {
-    max-width: 90%;
-  }
+.q-badge {
+  color: black;
+  background-color: $light;
+  padding: 5px 20px 5px 20px;
+  margin-right: 10px;
 }
 </style>

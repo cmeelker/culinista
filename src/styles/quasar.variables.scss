@@ -12,3 +12,12 @@ $info: #31ccec;
 $warning: #f2c037;
 
 $background: #eeedec;
+
+// Duplicate color definitions is necessary to style quasar components
+
+.text-brand {
+  color: $primary !important;
+}
+.bg-brand {
+  background: $primary !important;
+}
