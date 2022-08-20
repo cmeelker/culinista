@@ -124,7 +124,7 @@ function hideMenu() {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   .header {
     flex-direction: column;
   }
