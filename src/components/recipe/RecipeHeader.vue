@@ -64,57 +64,9 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="image"><img :src="recipe.image" /></div>
-  <div class="title-area">
-    <div v-if="isFavorite">
-      <q-icon
-        name="ion-star"
-        size="md"
-        color="#2a3238"
-        @click="toggleFavorite()"
-      >
-        <q-tooltip :delay="1000"> Verwijder uit favorieten</q-tooltip>
-      </q-icon>
-    </div>
-    <div class="favorite-icon" v-else>
-      <q-icon
-        name="ion-star-outline"
-        size="md"
-        color="#2a3238"
-        @click="toggleFavorite()"
-        ><q-tooltip :delay="1000"> Toevoegen aan favorieten</q-tooltip>
-      </q-icon>
-    </div>
-    <div class="title">
-      <h3>{{ recipe.title }}</h3>
-    </div>
-    <div class="tags">
-      <TagList
-        :class="{ hide: showEditComponent }"
-        :tags="recipe.tags ?? []"
-        @show-edit-component="showEditComponent = true"
-      />
-      <TagEdit
-        :class="{ hide: !showEditComponent }"
-        :recipe-id="recipe.id"
-        :tags="recipe.tags ?? []"
-        @close-edit-component="showEditComponent = false"
-      />
-    </div>
-    <div class="source">
-      <div class="source-logo"><img src="@/assets/AH.png" /></div>
-      <div class="source-title">
-        <a :href="recipe.url" target="_blank">
-          {{ toDisplayName(recipe.source as string) }}</a
-        >
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script lang="ts" setup>
-// Gaat op de schop
 
 import { toDisplayName } from "@/models/Source";
 import TagList from "@/components/tags/TagList.vue";
