@@ -14,6 +14,7 @@ import { useRoute } from "vue-router";
 import { useRecipeStore } from "@/stores/recipe";
 import RecipeDetails from "@/components/recipe/RecipeDetails.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
+import { onBeforeRouteUpdate } from "vue-router";
 
 const { recipe, loading, error } = storeToRefs(useRecipeStore());
 
@@ -22,4 +23,9 @@ const id = +route.params.id;
 
 const recipeStore = useRecipeStore();
 recipeStore.fetchRecipe(id);
+
+onBeforeRouteUpdate(async (to, _) => {
+  const recipeStore = useRecipeStore();
+  await recipeStore.fetchRecipe(+to.params.id);
+});
 </script>
