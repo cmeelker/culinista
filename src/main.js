@@ -6,7 +6,6 @@ import router from "./router";
 import { Quasar } from "quasar";
 import quasarUserOptions from "./quasar-user-options";
 import "quasar/dist/quasar.sass";
-import "./styles/quasar.scss";
 import { createAuth0 } from "@auth0/auth0-vue";
 
 const app = createApp(App);
