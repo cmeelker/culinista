@@ -1,5 +1,71 @@
 <template>
-  <div class="image"><img :src="recipe.image" /></div>
+  <div
+    class="flex flex-col lg:flex-row w-full rounded sm:rounded-xl overflow-hidden"
+  >
+    <div class="basis-2/5">
+      <a :href="recipe.url" target="_blank">
+        <img class="h-full object-cover" :src="recipe.image" />
+      </a>
+    </div>
+    <div class="basis-3/5 flex h-full content-between">
+      <h1 class="text-2xl sm:text-6xl text-bold text-dark p-4 sm:p-10">
+        {{ recipe.title }}
+      </h1>
+      <div class="mb-2 w-full h-full flex items-center">
+        <hr class="my-1 bg-black w-full" />
+        <div class="px-4 sm:px-10 flex justify-between w-full">
+          <TagList
+            v-if="!showEditComponent"
+            class="min-h-[80px] m-auto sm:m-0 sm:mr-4"
+            :tags="recipe.tags ?? []"
+            @show-edit-component="showEditComponent = true"
+          />
+          <TagEdit
+            v-if="showEditComponent"
+            class="min-h-[80px]"
+            :recipe-id="recipe.id"
+            :tags="recipe.tags ?? []"
+            @close-edit-component="showEditComponent = false"
+          />
+          <div class="m-auto sm:m-0 sm:self-end">
+            Toegevoegd door <strong>Christa</strong>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sm:bg-background w-full sm:h-10 flex px-4 sm:px-10 justify-between items-center"
+      >
+        <div class="flex mx-auto mt-8 sm:m-0 order-2 sm:order-1">
+          <div class="mr-6">
+            <q-btn flat disable>
+              <q-icon
+                name="ion-heart"
+                size="sm"
+                color="grey"
+                class="mr-3"
+              />Bewaar
+            </q-btn>
+          </div>
+          <div>
+            <q-btn flat disable>
+              <q-icon name="ion-share" size="sm" color="grey" class="mr-3" />
+              Deel
+            </q-btn>
+          </div>
+        </div>
+
+        <a
+          :href="recipe.url"
+          target="_blank"
+          class="underline underline-offset-2 m-auto sm:m-0"
+        >
+          {{ toDisplayName(recipe.source as string) }}</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="image"><img :src="recipe.image" /></div>
   <div class="title-area">
     <div v-if="isFavorite">
       <q-icon
@@ -44,7 +110,7 @@
         >
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>
@@ -72,97 +138,3 @@ function toggleFavorite() {
   favoriteStore.toggleFavorite(user.value.sub as string, props.recipe.id);
 }
 </script>
-
-<style scoped lang="scss">
-@import "@/styles/quasar.variables.scss";
-
-.hide {
-  display: none;
-}
-
-.image {
-  border-radius: 10px;
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  img {
-    border-radius: 10px;
-    max-width: 100%;
-  }
-}
-
-.title-area {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-h3 {
-  margin: 10px;
-  font-weight: 500;
-}
-
-.title {
-  margin-bottom: 10px;
-}
-
-.tags {
-  margin: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.source {
-  margin: 5px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  a {
-    text-underline-offset: 5px;
-    color: #384789;
-  }
-}
-
-.source-logo {
-  margin-right: 10px;
-  img {
-    max-width: 30px;
-  }
-}
-
-.q-icon {
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.q-icon {
-  color: $primary;
-}
-
-@media screen and (max-width: 600px) {
-  h3 {
-    font-size: 25px;
-    margin: 0px;
-    line-height: 1.8rem;
-  }
-
-  .image {
-    img {
-      margin-bottom: 20px;
-    }
-  }
-}
-
-@media screen and (max-width: 800px) {
-  h3 {
-    font-size: 32px;
-    margin: 0px;
-    line-height: 1.8rem;
-  }
-}
-</style>

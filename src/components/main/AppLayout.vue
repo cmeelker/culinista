@@ -3,11 +3,13 @@
     class="h-20 bg-background border-b-[1px] border-dark w-full fixed top-0 z-50 header-transition"
     id="main-header"
   >
-    <div class="mx-auto max-w-[1400px]">
+    <div class="mx-auto max-w-[1300px]">
       <Header />
     </div>
   </div>
-  <div class="mx-auto mt-20 pt-5 pb-2 bg-white z-10 max-w-[1400px]">
+  <div
+    class="mx-auto mt-16 sm:mt-20 pt-10 pb-2 px-6 sm:px-10 bg-white z-10 max-w-[1300px]"
+  >
     <router-view />
   </div>
 </template>

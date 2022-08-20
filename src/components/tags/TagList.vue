@@ -42,7 +42,6 @@ defineEmits(["showEditComponent"]);
     background-color: $light;
     padding: 5px 20px 5px 20px;
     margin-right: 10px;
-    margin-top: 10px;
   }
 }
 

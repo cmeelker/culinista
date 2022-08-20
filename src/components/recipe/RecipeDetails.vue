@@ -1,22 +1,18 @@
 <template>
-  <div class="recipe">
-    <div class="header">
-      <RecipeHeader :recipe="recipe" />
-    </div>
-    <div class="footer">
-      <q-btn
-        outline
-        label="Recept verwijderen"
-        :loading="loading"
-        color="brand"
-        @click="deleteRecipe()"
-      />
-    </div>
+  <RecipeHeader :recipe="recipe" />
+
+  <div class="flex justify-center mt-10 hidden">
+    <q-btn
+      outline
+      label="Recept verwijderen"
+      :loading="loading"
+      color="brand"
+      @click="deleteRecipe()"
+    />
   </div>
 </template>
-<script lang="ts" setup>
-// Gaat op de schop
 
+<script lang="ts" setup>
 import type { Recipe } from "../../models/Recipe";
 import RecipeHeader from "./RecipeHeader.vue";
 import { useQuasar } from "quasar";
@@ -53,35 +49,3 @@ function deleteRecipe() {
   });
 }
 </script>
-
-<style lang="scss" scoped>
-@import "@/styles/quasar.variables.scss";
-.recipe {
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-}
-
-.header {
-  height: 250px;
-  display: flex;
-  margin-bottom: 40px;
-}
-
-.footer {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-@media screen and (max-width: 600px) {
-  .header {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .recipe {
-    padding: 0 10px;
-  }
-}
-</style>

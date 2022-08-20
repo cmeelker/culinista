@@ -68,9 +68,7 @@ async function saveTags() {
 .tags-edit-content {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #cccccc;
-  margin: auto;
-  align-items: flex-end;
+  align-items: center;
   max-width: 500px;
 }
 
@@ -80,7 +78,7 @@ async function saveTags() {
     background: $light;
     color: black;
     border-radius: 16px;
-    padding: 5px 15px 5px 15px;
+    padding: 5px 20px 5px 20px;
   }
   .ti-input {
     border: none;

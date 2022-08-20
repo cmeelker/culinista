@@ -5,6 +5,6 @@ export enum Source {
 export function toDisplayName(source: string) {
   switch (source) {
     case "AH":
-      return "Albert Heijn";
+      return "www.ah.nl/allerhande";
   }
 }
