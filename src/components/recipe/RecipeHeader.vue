@@ -48,6 +48,8 @@
 </template>
 
 <script lang="ts" setup>
+// Gaat op de schop
+
 import { toDisplayName } from "@/models/Source";
 import TagList from "@/components/tags/TagList.vue";
 import TagEdit from "@/components/tags/TagEdit.vue";

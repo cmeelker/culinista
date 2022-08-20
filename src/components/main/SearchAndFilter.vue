@@ -1,23 +1,16 @@
 <template>
-  <div class="search">
-    <q-input
-      v-model="filter"
-      outlined
-      color="brand"
-      placeholder="Zoek recepten"
-    >
-      <template v-slot:prepend>
-        <q-avatar>
-          <q-icon name="ion-search" size="md"></q-icon>
-        </q-avatar>
-      </template>
-      <template v-slot:append v-if="showClearIcon">
-        <q-avatar class="clear">
-          <q-icon name="ion-close" size="md" @click="clearFilter"></q-icon>
-        </q-avatar>
-      </template>
-    </q-input>
-  </div>
+  <q-input v-model="filter" outlined color="brand" placeholder="Zoek recepten">
+    <template v-slot:prepend>
+      <q-avatar>
+        <q-icon name="ion-search" size="md"></q-icon>
+      </q-avatar>
+    </template>
+    <template v-slot:append v-if="showClearIcon">
+      <q-avatar class="clear">
+        <q-icon name="ion-close" size="md" @click="clearFilter"></q-icon>
+      </q-avatar>
+    </template>
+  </q-input>
 </template>
 
 <script lang="ts" setup>
@@ -45,10 +38,6 @@ function clearFilter() {
 
 <style lang="scss" scoped>
 @import "@/styles/quasar.variables.scss";
-
-.search {
-  margin-top: 0px;
-}
 
 .q-input {
   font-size: 20px;

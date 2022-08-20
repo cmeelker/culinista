@@ -1,6 +1,13 @@
 <template>
-  <div class="main-header" id="main-header"><Header /></div>
-  <div class="router-view">
+  <div
+    class="h-20 bg-background border-b-[1px] border-dark w-full fixed top-0 z-50 header-transition"
+    id="main-header"
+  >
+    <div class="mx-auto max-w-[1400px]">
+      <Header />
+    </div>
+  </div>
+  <div class="mx-auto mt-20 pt-5 pb-2 bg-white z-10 max-w-[1400px]">
     <router-view />
   </div>
 </template>
@@ -28,25 +35,7 @@ window.onscroll = function () {
 <style scoped lang="scss">
 @import "@/styles/quasar.variables.scss";
 
-.main-header {
-  height: 80px;
-  background-color: $background;
-  position: fixed;
-  width: 100%;
-  top: 0px;
-  margin-right: 20px;
-  border-bottom: 1px solid $dark;
+.header-transition {
   transition: top 0.4s;
-  z-index: 2;
-}
-
-.router-view {
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 80px;
-  padding-top: 20px;
-  background-color: white;
-  position: relative;
-  z-index: 1;
 }
 </style>
