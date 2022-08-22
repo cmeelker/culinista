@@ -10,7 +10,7 @@
     <div class="basis-3/5">
       <div class="flex flex-col sm:flex-row w-full justify-between">
         <h1
-          class="text-center sm:text-start text-2xl sm:text-6xl text-bold text-dark py-4 sm:p-10 m-0 sm:mr-10 basis-4/5"
+          class="text-2xl sm:text-6xl text-bold text-dark py-4 sm:p-10 m-0 sm:mr-10 basis-4/5"
         >
           {{ recipe.title }}
         </h1>
@@ -28,8 +28,8 @@
           class="justify-center sm:justify-start mb-10"
           :tags="recipe.tags ?? []"
         />
-        <div class="text-center sm:flex sm:justify-between sm:text-start">
-          <div>
+        <div class="sm:flex sm:justify-between">
+          <div class="flex flex-col">
             <p class="mb-0">Toegevoegd door <strong>Christa</strong></p>
             <a
               :href="recipe.url"
