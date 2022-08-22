@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import router from "@/router/index";
-import LogInLogOutButton from "./LogInLogOutButton.vue";
+import LogInLogOutButton from "../buttons/LogInLogOutButton.vue";
 
 function toggleMenu() {
   const x = document.getElementById("menu-section");

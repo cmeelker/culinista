@@ -1,5 +1,5 @@
 <template>
-  <q-btn v-if="isAuthenticated" class="login-button" outline
+  <q-btn v-if="isAuthenticated" outline
     ><q-icon name="ion-person" size="sm" class="mr-3" color="dark" />{{
       user.given_name || user.nickname
     }}
@@ -11,17 +11,15 @@
       </q-list>
     </q-menu>
   </q-btn>
-  <q-btn v-else class="login-button" outline label="Log in" @click="login" />
+  <LoginButton v-else />
 </template>
 
 <script setup lang="ts">
 import { useAuth0 } from "@auth0/auth0-vue";
+import LoginButton from "./LogInButton.vue";
 
-const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+const { logout, isAuthenticated, user } = useAuth0();
 
-async function login() {
-  loginWithRedirect();
-}
 function logoutUser() {
   logout({ returnTo: window.location.origin });
 }
