@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
-import SearchAndFilter from "@/components/main/SearchAndFilter.vue";
+import SearchAndFilter from "@/components/recipe/SearchAndFilter.vue";
 import type { Recipe } from "@/models/Recipe";
 import RecipeList from "./RecipeList.vue";
 

@@ -14,8 +14,10 @@
       <div class="menu">
         <nav class="stroke">
           <ul>
-            <li @click="router.push('/favourite'), hideMenu()">Favorieten</li>
-            <li @click="router.push('/addRecipe'), hideMenu()">
+            <li @click="goToProtectedPage('/favourite', 'Favorieten')">
+              Favorieten
+            </li>
+            <li @click="goToProtectedPage('/addRecipe', 'Recepten toevoegen')">
               Recept toevoegen
             </li>
           </ul>
@@ -26,11 +28,21 @@
       </div>
     </div>
   </div>
+  <q-dialog v-model="showUnauthicatedModal">
+    <UnAuthModal :title="authenticatedPage" />
+  </q-dialog>
 </template>
 
 <script setup lang="ts">
 import router from "@/router/index";
+import { useAuth0 } from "@auth0/auth0-vue";
+import { ref } from "vue";
 import LogInLogOutButton from "../buttons/LogInLogOutButton.vue";
+import UnAuthModal from "@/components/main/UnAuthModal.vue";
+
+const { isAuthenticated } = useAuth0();
+const showUnauthicatedModal = ref(false);
+const authenticatedPage = ref("");
 
 function toggleMenu() {
   const x = document.getElementById("menu-section");
@@ -52,6 +64,16 @@ function hideMenu() {
       x.className = "menu-section";
     }
   }
+}
+
+function goToProtectedPage(path: string, title: string) {
+  if (isAuthenticated.value) {
+    router.push(path);
+    hideMenu();
+  }
+
+  authenticatedPage.value = title;
+  showUnauthicatedModal.value = true;
 }
 </script>
 
