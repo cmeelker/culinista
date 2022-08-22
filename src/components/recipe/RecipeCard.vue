@@ -1,5 +1,7 @@
 <template>
-  <div class="hover:shadow-lg cursor-pointer h-full border-b flex">
+  <div
+    class="hover:shadow-lg cursor-pointer h-full border-b flex rounded-lg overflow-hidden"
+  >
     <div class="h-36 overflow-hidden flex flex-col justify-center">
       <img :src="recipe.image" />
     </div>

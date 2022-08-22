@@ -40,7 +40,7 @@
             >
           </div>
           <q-btn class="bg-brand text-white mt-5 sm:mt-0" flat
-            >Bekijk recept</q-btn
+            ><a :href="recipe.url" target="_blank">Bekijk recept</a></q-btn
           >
         </div>
       </div>
