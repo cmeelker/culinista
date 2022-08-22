@@ -5,10 +5,10 @@
     <div class="h-36 overflow-hidden flex flex-col justify-center">
       <img :src="recipe.image" />
     </div>
-    <div class="h-6 flex mt-2.5 mr-2.5 mb-1 ml-1">
+    <div class="h-6 flex mt-2.5 mx-2.5 mb-1">
       <q-badge v-for="tag in tags" :key="tag" rounded :label="tag" />
     </div>
-    <div class="flex items-center m-1.5">
+    <div class="flex items-center my-1.5 mx-2.5">
       <div class="font-bold basis-5/6">{{ recipe.title }}</div>
       <div class="basis-1/6 p-2"><img src="@/assets/AH.png" /></div>
     </div>
