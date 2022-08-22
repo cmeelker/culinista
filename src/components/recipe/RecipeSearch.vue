@@ -1,5 +1,5 @@
 <template>
-  <SearchAndFilter />
+  <SearchBar />
 
   <h6 v-if="error">Er is iets mis gegaan :(</h6>
   <div v-if="loading">
@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
-import SearchAndFilter from "@/components/recipe/SearchAndFilter.vue";
+import SearchBar from "@/components/recipe/SearchBar.vue";
 import type { Recipe } from "@/models/Recipe";
 import RecipeList from "./RecipeList.vue";
 
