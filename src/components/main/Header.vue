@@ -21,21 +21,8 @@
           </ul>
         </nav>
       </div>
-      <div class="login">
-        <q-btn
-          v-if="isAuthenticated"
-          class="login-button"
-          outline
-          label="Logout"
-          @click="logoutUser"
-        />
-        <q-btn
-          v-else
-          class="login-button"
-          outline
-          label="Log in"
-          @click="login"
-        />
+      <div class="login mt-3 sm:mt-0">
+        <LogInLogOutButton />
       </div>
     </div>
   </div>
@@ -43,15 +30,7 @@
 
 <script setup lang="ts">
 import router from "@/router/index";
-import { useAuth0 } from "@auth0/auth0-vue";
-
-const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
-async function login() {
-  loginWithRedirect();
-}
-function logoutUser() {
-  logout({ returnTo: window.location.origin });
-}
+import LogInLogOutButton from "./LogInLogOutButton.vue";
 
 function toggleMenu() {
   const x = document.getElementById("menu-section");

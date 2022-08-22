@@ -10,7 +10,7 @@
 
     <q-btn flat class="sm:mt-4">
       <q-icon name="ion-create" size="sm" color="grey" />
-      <q-menu>
+      <q-menu anchor="bottom right" self="top right">
         <q-list style="min-width: 100px">
           <q-item clickable v-close-popup @click="$emit('showEditComponent')">
             <q-item-section>Tags wijzigen</q-item-section>
