@@ -109,9 +109,7 @@ const { error } = storeToRefs(useRecipeStore());
 const fetchedPreview = ref(false);
 const loading = ref(false);
 
-const url = ref(
-  "https://www.eatwell101.com/garlic-mushrooms-cauliflower-recipe?pp=1"
-);
+const url = ref("");
 const title = ref("");
 const images: Ref<string[]> = ref([]);
 const selectedImage = ref("");
