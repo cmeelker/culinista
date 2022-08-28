@@ -9,14 +9,7 @@ export default function filterRecipes(
     const includesTags = recipe.tags
       ? recipe.tags.toString().toLowerCase().includes(filter)
       : false;
-    const includesIngredients = recipe.ingredients
-      .map((ingredient) => {
-        return ingredient.name;
-      })
-      .toString()
-      .toLowerCase()
-      .includes(filter);
 
-    return includesTitle || includesTags || includesIngredients;
+    return includesTitle || includesTags;
   });
 }

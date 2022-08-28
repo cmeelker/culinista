@@ -36,7 +36,7 @@
               target="_blank"
               class="underline underline-offset-2"
             >
-              {{ toDisplayName(recipe.source as string) }}</a
+              {{ recipe.url as string }}</a
             >
           </div>
           <q-btn class="bg-brand text-white mt-5 sm:mt-0" flat
@@ -61,7 +61,6 @@
 </template>
 
 <script lang="ts" setup>
-import { toDisplayName } from "@/models/Source";
 import TagList from "@/components/tags/TagList.vue";
 import TagEdit from "@/components/tags/TagEdit.vue";
 import type { Recipe } from "@/models/Recipe";
