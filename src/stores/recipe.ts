@@ -9,6 +9,7 @@ import {
 import type { Source } from "@jeroenhuinink/tsmapper";
 import type { Tag } from "@/models/Tag";
 import filterRecipes from "@/util/filter";
+import type { RecipePreview } from "@/models/RecipePreview";
 
 interface State {
   recipe: Recipe | null;
@@ -31,6 +32,7 @@ export const useRecipeStore = defineStore({
     filterRecipes(filter: string): void {
       this.filteredRecipes = filterRecipes(filter.toLowerCase(), this.recipes);
     },
+
     async fetchRecipes() {
       this.loading = true;
       this.error = null;
@@ -47,6 +49,7 @@ export const useRecipeStore = defineStore({
       }
       this.loading = false;
     },
+
     async fetchRecipe(id: number, firstLoad = true) {
       if (firstLoad) {
         this.loading = true;
@@ -61,18 +64,23 @@ export const useRecipeStore = defineStore({
       }
       this.loading = false;
     },
-    async addRecipe(url: string): Promise<number | null> {
+
+    async fetchRecipePreview(url: string): Promise<RecipePreview | null> {
       this.loading = true;
-      let id: number | null = null;
+
+      let recipePreview: RecipePreview | null = null;
+
       try {
-        const { data } = await axios.post("/Crawler", url);
-        id = data;
+        const { data } = await axios.get(`/Crawler?url=${url}`);
+        recipePreview = data;
       } catch (error) {
         this.error = "Het lijkt er op dat je geen geldige URL hebt ingevuld";
       }
+
       this.loading = false;
-      return id;
+      return recipePreview;
     },
+
     async editTags(id: number, tags: Tag[]): Promise<void> {
       const tagString = tags?.length > 0 ? tags.toString() : null;
 
@@ -83,6 +91,18 @@ export const useRecipeStore = defineStore({
       }
       await this.fetchRecipe(id, false);
     },
+
+    async addRecipe(recipe: Recipe) {
+      this.loading = true;
+      try {
+        await axios.post(`/Recipe`, recipe);
+      } catch (error) {
+        this.error = "Het toevoegen is niet gelukt";
+      }
+
+      this.loading = false;
+    },
+
     async deleteRecipe(id: number) {
       this.loading = true;
       try {

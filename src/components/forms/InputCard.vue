@@ -4,7 +4,7 @@
       <NumberCircle :number="number" :filled="isDone" />
     </div>
     <div class="w-full mx-10">
-      <div class="text-2xl font-bold">{{ title }}</div>
+      <div class="text-lg sm:text-2xl font-bold">{{ title }}</div>
       <slot></slot>
     </div>
   </div>

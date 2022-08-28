@@ -2,9 +2,9 @@ import { createMapper } from "@jeroenhuinink/tsmapper";
 import { Tag } from "./Tag";
 
 export type Recipe = {
-  id: number;
+  id?: number;
   title: string;
-  tags: Tag[];
+  tags?: Tag[];
   url: string;
   image: string;
 };

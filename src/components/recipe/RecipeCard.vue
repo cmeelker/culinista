@@ -10,7 +10,9 @@
     </div>
     <div class="flex items-center my-1.5 mx-2.5">
       <div class="font-bold basis-5/6">{{ recipe.title }}</div>
-      <div class="basis-1/6 p-2"><img src="@/assets/AH.png" /></div>
+      <div class="basis-1/6 p-2">
+        <img src="@/assets/fork-knive-icon.png" />
+      </div>
     </div>
   </div>
 </template>
