@@ -92,15 +92,20 @@ export const useRecipeStore = defineStore({
       await this.fetchRecipe(id, false);
     },
 
-    async addRecipe(recipe: Recipe) {
+    async addRecipe(recipe: Recipe): Promise<number | null> {
       this.loading = true;
+      let id: number | null = null;
+
       try {
-        await axios.post(`/Recipe`, recipe);
+        const { data } = await axios.post(`/Recipeee`, recipe);
+        id = data;
       } catch (error) {
-        this.error = "Het toevoegen is niet gelukt";
+        this.error =
+          "Sorry! Er is iets mis gegaan met het toevoegen van dit recept";
       }
 
       this.loading = false;
+      return id;
     },
 
     async deleteRecipe(id: number) {

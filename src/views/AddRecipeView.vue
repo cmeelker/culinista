@@ -66,6 +66,14 @@
       </InputCard>
     </div>
 
+    <div
+      v-if="fetchedPreview"
+      :class="{ 'px-5 py-1 mb-5 -mt-5': error, 'border-none': !error }"
+      class="bg-red-100 rounded border border-red-300"
+    >
+      {{ error }}
+    </div>
+
     <q-btn
       v-if="fetchedPreview"
       unelevated
@@ -93,6 +101,7 @@ import ImagePicker from "@/components/forms/ImagePicker.vue";
 import { useRecipeStore } from "@/stores/recipe";
 import { storeToRefs } from "pinia";
 import { ref, type Ref } from "vue";
+import router from "@/router";
 
 const recipeStore = useRecipeStore();
 const { error } = storeToRefs(useRecipeStore());
@@ -124,16 +133,16 @@ async function fetchPreview() {
 async function addRecipe() {
   loading.value = true;
 
-  await recipeStore.addRecipe({
+  const id = await recipeStore.addRecipe({
     title: title.value,
     url: url.value,
     image: selectedImage.value,
   });
 
-  loading.value = false;
+  if (id) {
+    router.push(`/recipe/${id}`);
+  }
 
-  // if (id) {
-  //   router.push(`/recipe/${id}`);
-  // }
+  loading.value = false;
 }
 </script>
