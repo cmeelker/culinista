@@ -47,7 +47,9 @@ function deleteRecipe() {
     ok: { label: "Oke", flat: true, color: "brand" },
     cancel: { label: "Annuleer", flat: true, color: "black" },
   }).onOk(async () => {
-    await recipeStore.deleteRecipe(props.recipe.id);
+    if (props.recipe.id) {
+      await recipeStore.deleteRecipe(props.recipe.id);
+    }
 
     // TO DO: Error afhandeling
 

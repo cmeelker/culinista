@@ -15,7 +15,7 @@ defineProps<{
   recipes: Recipe[];
 }>();
 
-function openRecipe(id: number) {
+function openRecipe(id?: number) {
   router.push(`/recipe/${id}`);
 }
 </script>

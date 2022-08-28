@@ -51,6 +51,7 @@
       <q-card-section><h4>Tags wijzigen</h4></q-card-section>
       <q-card-section class="row items-center">
         <TagEdit
+          v-if="recipe.id"
           :recipe-id="recipe.id"
           :tags="recipe.tags ?? []"
           @close-edit-component="editingTags = false"
@@ -65,25 +66,13 @@ import TagList from "@/components/tags/TagList.vue";
 import TagEdit from "@/components/tags/TagEdit.vue";
 import type { Recipe } from "@/models/Recipe";
 import { ref } from "vue";
-import { useFavoriteStore } from "@/stores/favorite";
-import { useAuth0 } from "@auth0/auth0-vue";
 import ActionsButtons from "./ActionsButtons.vue";
 
 const props = defineProps<{
   recipe: Recipe;
 }>();
 
-const favoriteStore = useFavoriteStore();
-
-const { user } = useAuth0();
-
 const editingTags = ref(false);
-
-const isFavorite = ref(true);
-
-function toggleFavorite() {
-  favoriteStore.toggleFavorite(user.value.sub as string, props.recipe.id);
-}
 
 function showEditComponent() {
   editingTags.value = true;
