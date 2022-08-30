@@ -3,6 +3,7 @@ import { createMapper } from "@jeroenhuinink/tsmapper";
 export type RecipePreview = {
   title: string;
   images: string[];
+  favicon?: string;
 };
 
 export const recipeMapper = createMapper("RecipeMapper")

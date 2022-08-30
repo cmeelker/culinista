@@ -113,6 +113,7 @@ const url = ref("");
 const title = ref("");
 const images: Ref<string[]> = ref([]);
 const selectedImage = ref("");
+const favicon: Ref<string | null> = ref(null);
 
 async function fetchPreview() {
   loading.value = true;
@@ -122,6 +123,7 @@ async function fetchPreview() {
     title.value = recipePreview.title;
     images.value = recipePreview.images;
     selectedImage.value = recipePreview.images[0];
+    favicon.value = recipePreview.favicon ? recipePreview.favicon : null;
 
     fetchedPreview.value = true;
   }
@@ -135,6 +137,7 @@ async function addRecipe() {
     title: title.value,
     url: url.value,
     image: selectedImage.value,
+    favicon: favicon.value ? favicon.value : undefined,
   });
 
   if (id) {

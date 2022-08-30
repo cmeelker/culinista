@@ -9,7 +9,7 @@
     <div v-if="noSearchResult" class="ml-5 mb-5 mt-5">
       Helaas! Er zijn geen zoekresultaten.
     </div>
-    <RecipeList :recipes="recipes" />
+    <RecipeGrid :recipes="recipes" />
   </div>
 </template>
 
@@ -17,7 +17,7 @@
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import SearchBar from "@/components/recipe/SearchBar.vue";
 import type { Recipe } from "@/models/Recipe";
-import RecipeList from "./RecipeList.vue";
+import RecipeGrid from "./RecipeGrid.vue";
 
 defineProps<{
   recipes: Recipe[];

@@ -5,13 +5,24 @@
     <div class="h-36 overflow-hidden flex flex-col justify-center">
       <img :src="recipe.image" />
     </div>
-    <div class="h-6 flex mt-2.5 mx-2.5 mb-1">
-      <q-badge v-for="tag in tags" :key="tag" rounded :label="tag" />
+    <div class="max-h-6 flex mt-2.5 mx-2.5 mb-1">
+      <q-badge
+        v-for="tag in tags"
+        :key="tag"
+        rounded
+        :label="tag"
+        class="h-6"
+      />
     </div>
-    <div class="flex items-center my-1.5 mx-2.5">
+    <div class="flex items-center my-1.5 mx-2.5 w-full">
       <div class="font-bold basis-5/6">{{ recipe.title }}</div>
-      <div class="basis-1/6 p-2">
-        <img src="@/assets/fork-knive-icon.png" />
+      <div class="basis-1/6">
+        <img
+          v-if="recipe.favicon === undefined"
+          src="@/assets/fork-knive-icon.png"
+          class="h-[32px] w-[32px]"
+        />
+        <img v-else :src="recipe.favicon" class="h-[32px] w-[32px]" />
       </div>
     </div>
   </div>
@@ -24,6 +35,8 @@ import { computed } from "@vue/reactivity";
 const props = defineProps<{
   recipe: Recipe;
 }>();
+
+console.log(props.recipe.favicon);
 
 const tags = computed(() => {
   return props.recipe.tags

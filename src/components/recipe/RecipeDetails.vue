@@ -36,7 +36,7 @@
               target="_blank"
               class="underline underline-offset-2"
             >
-              {{ recipe.url as string }}</a
+              {{ formatUrl(recipe.url) }}</a
             >
           </div>
           <q-btn class="bg-brand text-white mt-5 sm:mt-0" flat
@@ -76,6 +76,11 @@ const editingTags = ref(false);
 
 function showEditComponent() {
   editingTags.value = true;
+}
+
+function formatUrl(url: string) {
+  const splittedUrl = url.split("/");
+  return splittedUrl[2];
 }
 </script>
 
