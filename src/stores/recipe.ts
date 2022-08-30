@@ -97,7 +97,7 @@ export const useRecipeStore = defineStore({
       let id: number | null = null;
 
       try {
-        const { data } = await axios.post(`/Recipeee`, recipe);
+        const { data } = await axios.post(`/Recipe`, recipe);
         id = data;
       } catch (error) {
         this.error =
