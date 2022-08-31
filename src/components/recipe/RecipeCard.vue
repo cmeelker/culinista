@@ -36,8 +36,6 @@ const props = defineProps<{
   recipe: Recipe;
 }>();
 
-console.log(props.recipe.favicon);
-
 const tags = computed(() => {
   return props.recipe.tags
     ? props.recipe.tags.length > 2
