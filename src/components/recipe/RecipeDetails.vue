@@ -17,7 +17,7 @@
         <div class="m-auto sm:mt-10 sm:mr-5">
           <ActionsButtons
             :recipe="props.recipe"
-            :is-recipe-owner="recipe.userId === user.sub"
+            :is-recipe-owner="isRecipeOwner"
             @show-edit-component="showEditComponent"
           />
         </div>
@@ -68,7 +68,7 @@
 import TagList from "@/components/tags/TagList.vue";
 import TagEdit from "@/components/tags/TagEdit.vue";
 import type { Recipe } from "@/models/Recipe";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import ActionsButtons from "./ActionsButtons.vue";
 import { getUserName } from "@/services/UserService";
 import { useAuth0 } from "@auth0/auth0-vue";
@@ -77,10 +77,18 @@ const props = defineProps<{
   recipe: Recipe;
 }>();
 
-const { user } = useAuth0();
+const { user, isAuthenticated } = useAuth0();
 
 const editingTags = ref(false);
 const username = ref("");
+
+const isRecipeOwner = computed(() => {
+  if (isAuthenticated.value) {
+    return props.recipe.userId === user.value.sub;
+  }
+
+  return false;
+});
 
 getUserName(props.recipe.userId).then(async (data) => {
   username.value = data;
