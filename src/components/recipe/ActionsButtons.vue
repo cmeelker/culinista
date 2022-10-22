@@ -8,7 +8,7 @@
       <q-icon name="ion-share" size="sm" color="grey" />
     </q-btn>
 
-    <q-btn flat class="sm:mt-4">
+    <q-btn v-if="isRecipeOwner" flat class="sm:mt-4">
       <q-icon name="ion-create" size="sm" color="grey" />
       <q-menu anchor="bottom right" self="top right">
         <q-list style="min-width: 100px">
@@ -32,6 +32,7 @@ import { useQuasar } from "quasar";
 
 const props = defineProps<{
   recipe: Recipe;
+  isRecipeOwner: boolean;
 }>();
 
 defineEmits(["showEditComponent"]);

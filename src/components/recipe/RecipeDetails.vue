@@ -17,6 +17,7 @@
         <div class="m-auto sm:mt-10 sm:mr-5">
           <ActionsButtons
             :recipe="props.recipe"
+            :is-recipe-owner="recipe.userId === user.sub"
             @show-edit-component="showEditComponent"
           />
         </div>
@@ -30,7 +31,9 @@
         />
         <div class="sm:flex sm:justify-between">
           <div class="flex flex-col">
-            <p class="mb-0">Toegevoegd door <strong>Christa</strong></p>
+            <p class="mb-0">
+              Toegevoegd door <strong>{{ username }}</strong>
+            </p>
             <a
               :href="recipe.url"
               target="_blank"
@@ -67,12 +70,21 @@ import TagEdit from "@/components/tags/TagEdit.vue";
 import type { Recipe } from "@/models/Recipe";
 import { ref } from "vue";
 import ActionsButtons from "./ActionsButtons.vue";
+import { getUserName } from "@/services/UserService";
+import { useAuth0 } from "@auth0/auth0-vue";
 
 const props = defineProps<{
   recipe: Recipe;
 }>();
 
+const { user } = useAuth0();
+
 const editingTags = ref(false);
+const username = ref("");
+
+getUserName(props.recipe.userId).then(async (data) => {
+  username.value = data;
+});
 
 function showEditComponent() {
   editingTags.value = true;

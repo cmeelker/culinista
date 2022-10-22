@@ -7,6 +7,7 @@ export type Recipe = {
   tags?: Tag[];
   url: string;
   image: string;
+  userId: string;
   favicon?: string;
 };
 
@@ -40,6 +41,9 @@ export const recipeMapper = createMapper("RecipeMapper")
   .field("image", {
     type: "string",
   })
+  .field("userId", {
+    type: "string",
+  })
   .field("favicon", {
     type: "string",
     optional: true,
@@ -53,5 +57,6 @@ export function mapToInternalRecipe(recipe: ExternalRecipe): Recipe {
     url: recipe.url,
     image: recipe.image,
     favicon: recipe.favicon,
+    userId: recipe.userId,
   };
 }

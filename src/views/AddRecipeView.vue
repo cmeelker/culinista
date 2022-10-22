@@ -102,9 +102,11 @@ import { useRecipeStore } from "@/stores/recipe";
 import { storeToRefs } from "pinia";
 import { ref, type Ref } from "vue";
 import router from "@/router";
+import { useAuth0 } from "@auth0/auth0-vue";
 
 const recipeStore = useRecipeStore();
 const { error } = storeToRefs(useRecipeStore());
+const { user } = useAuth0();
 
 const fetchedPreview = ref(false);
 const loading = ref(false);
@@ -114,6 +116,7 @@ const title = ref("");
 const images: Ref<string[]> = ref([]);
 const selectedImage = ref("");
 const favicon: Ref<string | null> = ref(null);
+const userId: string = user.value.sub;
 
 async function fetchPreview() {
   loading.value = true;
@@ -137,6 +140,7 @@ async function addRecipe() {
     title: title.value,
     url: url.value,
     image: selectedImage.value,
+    userId: userId,
     favicon: favicon.value ? favicon.value : undefined,
   });
 
