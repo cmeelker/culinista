@@ -116,7 +116,7 @@ const title = ref("");
 const images: Ref<string[]> = ref([]);
 const selectedImage = ref("");
 const favicon: Ref<string | null> = ref(null);
-const userId: string = user.value.sub;
+const userId: string = user.value.sub ?? "anonymous";
 
 async function fetchPreview() {
   loading.value = true;
