@@ -68,6 +68,8 @@ function deleteRecipe() {
 }
 
 async function toggleFavorite() {
-  await favoriteStore.toggleFavorite(user.value.sub, props.recipe.id);
+  if (user.value.sub && props.recipe.id) {
+    await favoriteStore.toggleFavorite(user.value.sub, props.recipe.id);
+  }
 }
 </script>
