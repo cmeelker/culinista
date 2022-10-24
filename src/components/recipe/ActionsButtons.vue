@@ -1,6 +1,6 @@
 <template>
   <div class="sm:flex sm:flex-col">
-    <q-btn flat disable>
+    <q-btn flat @click="toggleFavorite()">
       <q-icon name="ion-heart" size="sm" color="grey" />
     </q-btn>
 
@@ -27,7 +27,9 @@
 <script setup lang="ts">
 import type { Recipe } from "@/models/Recipe";
 import router from "@/router";
+import { useFavoriteStore } from "@/stores/favorite";
 import { useRecipeStore } from "@/stores/recipe";
+import { useAuth0 } from "@auth0/auth0-vue";
 import { useQuasar } from "quasar";
 
 const props = defineProps<{
@@ -37,8 +39,11 @@ const props = defineProps<{
 
 defineEmits(["showEditComponent"]);
 
+const { user } = useAuth0();
+
 const $q = useQuasar();
 const recipeStore = useRecipeStore();
+const favoriteStore = useFavoriteStore();
 
 function deleteRecipe() {
   $q.dialog({
@@ -60,5 +65,9 @@ function deleteRecipe() {
     });
     router.push(`/`);
   });
+}
+
+async function toggleFavorite() {
+  await favoriteStore.toggleFavorite(user.value.sub, props.recipe.id);
 }
 </script>

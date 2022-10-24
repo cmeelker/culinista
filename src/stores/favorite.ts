@@ -4,6 +4,8 @@ import axios from "@/services/ApiClient";
 import type { Source } from "@jeroenhuinink/tsmapper";
 import filterRecipes from "@/util/filter";
 
+// TODO: From body queries
+
 interface State {
   recipes: Recipe[];
   filteredRecipes: Recipe[];
@@ -27,7 +29,7 @@ export const useFavoriteStore = defineStore({
       this.loading = true;
       this.error = null;
       try {
-        const { data } = await axios.get(`/Favorite/${userId}`);
+        const { data } = await axios.get(`/Favorite?userId=${userId}`);
         const recipes = data.map(function (recipe: Source) {
           return recipeMapper.map(recipe);
         });
@@ -42,10 +44,7 @@ export const useFavoriteStore = defineStore({
 
     async toggleFavorite(userId: string, recipeId: number) {
       try {
-        await axios.post("/Favorite", {
-          userId: userId,
-          recipieId: recipeId,
-        });
+        await axios.post(`/Favorite?userId=${userId}&recipeId=${recipeId}`);
       } catch (error) {
         this.error = error as string;
         console.log(error);
