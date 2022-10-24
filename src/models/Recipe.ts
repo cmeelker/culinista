@@ -1,8 +1,9 @@
 import { createMapper } from "@jeroenhuinink/tsmapper";
 import { Tag } from "./Tag";
 
-export type Recipe = {
-  id?: number; // TODO: Add type without id for new recipes
+export type Recipe = NewRecipe & { id: number };
+
+export type NewRecipe = {
   title: string;
   tags?: Tag[];
   url: string;

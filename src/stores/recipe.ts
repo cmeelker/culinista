@@ -4,6 +4,7 @@ import axios from "@/services/ApiClient";
 import {
   mapToInternalRecipe,
   recipeMapper,
+  type NewRecipe,
   type Recipe,
 } from "@/models/Recipe";
 import type { Source } from "@jeroenhuinink/tsmapper";
@@ -92,7 +93,7 @@ export const useRecipeStore = defineStore({
       await this.fetchRecipe(id, false);
     },
 
-    async addRecipe(recipe: Recipe): Promise<number | null> {
+    async addRecipe(recipe: NewRecipe): Promise<number | null> {
       this.loading = true;
       let id: number | null = null;
 
