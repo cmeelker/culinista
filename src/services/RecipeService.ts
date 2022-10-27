@@ -1,6 +1,7 @@
 import {
   mapToInternalRecipe,
   recipeMapper,
+  type NewRecipe,
   type Recipe,
 } from "@/models/Recipe";
 import axios from "@/services/ApiClient";
@@ -18,4 +19,14 @@ export async function fetchRecipe(id: number) {
   const { data } = await axios.get(`/Recipe/${id}`);
   const recipe = recipeMapper.map(data);
   return mapToInternalRecipe(recipe);
+}
+
+export async function fetchRecipePreview(url: string) {
+  const { data } = await axios.get(`/Crawler?url=${url}`);
+  return data;
+}
+
+export async function postRecipe(recipe: NewRecipe) {
+  const { data } = await axios.post(`/Recipe`, recipe);
+  return data;
 }
