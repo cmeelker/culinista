@@ -4,11 +4,11 @@ import { Tag } from "./Tag";
 export type Recipe = NewRecipe & { id: number };
 
 export type NewRecipe = {
-  title?: string;
-  tags?: Tag[];
-  url?: string;
-  image?: string;
-  userId?: string;
+  title: string;
+  tags: Tag[];
+  url: string;
+  image: string;
+  userId: string;
   favicon?: string;
 };
 

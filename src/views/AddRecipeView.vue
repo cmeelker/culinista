@@ -101,8 +101,8 @@ import type { NewRecipe } from "@/models/Recipe";
 
 const { user } = useAuth0();
 
-const emptyRecipe: NewRecipe = {};
-let newRecipe: NewRecipe = reactive(emptyRecipe);
+const emptyRecipe = {};
+let newRecipe: NewRecipe = reactive(emptyRecipe as NewRecipe);
 
 const images: Ref<string[]> = ref([]);
 const previewIsFetched = ref(false);
@@ -130,7 +130,7 @@ const addRecipeMutation = useMutation(
   },
   {
     onSuccess: (recipeId) => {
-      newRecipe = emptyRecipe;
+      newRecipe = emptyRecipe as NewRecipe;
       previewIsFetched.value = false;
 
       router.push(`/recipe/${recipeId}`);

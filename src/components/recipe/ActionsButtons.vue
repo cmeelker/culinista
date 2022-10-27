@@ -28,7 +28,7 @@
 import type { Recipe } from "@/models/Recipe";
 import router from "@/router";
 import { deleteRecipe } from "@/services/RecipeService";
-import { useFavoriteStore } from "@/stores/favorite";
+import { postFavorite } from "@/services/FavoriteService";
 import { useAuth0 } from "@auth0/auth0-vue";
 import {
   QBtn,
@@ -49,11 +49,9 @@ const props = defineProps<{
 defineEmits(["showEditComponent"]);
 
 const { user } = useAuth0();
-
 const $q = useQuasar();
-const favoriteStore = useFavoriteStore();
 
-const { mutate } = useMutation(
+const deleteMutation = useMutation(
   (recipeId: number) => {
     return deleteRecipe(recipeId);
   },
@@ -75,6 +73,17 @@ const { mutate } = useMutation(
   }
 );
 
+const favoriteMutation = useMutation(
+  (data: { userId: string; recipeId: number }) => {
+    return postFavorite(data);
+  },
+  {
+    onSuccess: () => {
+      // TO DO: Opnieuw ophalen of dit een favo is
+    },
+  }
+);
+
 function onDeleteRecipe() {
   $q.dialog({
     title: "Bevestigen",
@@ -83,13 +92,16 @@ function onDeleteRecipe() {
     ok: { label: "Oke", flat: true, color: "brand" },
     cancel: { label: "Annuleer", flat: true, color: "black" },
   }).onOk(async () => {
-    mutate(props.recipe.id);
+    deleteMutation.mutate(props.recipe.id);
   });
 }
 
 async function toggleFavorite() {
   if (user.value.sub && props.recipe.id) {
-    await favoriteStore.toggleFavorite(user.value.sub, props.recipe.id);
+    favoriteMutation.mutate({
+      userId: user.value.sub,
+      recipeId: props.recipe.id,
+    });
   }
 }
 </script>
