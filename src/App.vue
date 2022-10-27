@@ -6,4 +6,7 @@
 
 <script setup lang="ts">
 import AppLayout from "@/components/main/AppLayout.vue";
+import { useQueryProvider } from "vue-query";
+
+useQueryProvider();
 </script>

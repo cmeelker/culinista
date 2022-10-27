@@ -2,7 +2,7 @@
   <RecipeSearch
     :recipes="filteredRecipes"
     :no-search-result="noSearchResult"
-    :loading="loading"
+    :is-loading="loading"
     :error="error"
   />
 </template>

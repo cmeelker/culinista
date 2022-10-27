@@ -1,26 +1,15 @@
 <template>
   <RecipeSearch
-    :recipes="filteredRecipes"
-    :no-search-result="noSearchResult"
-    :loading="loading"
-    :error="error"
+    :recipes="data"
+    :is-loading="isLoading"
+    :error="(error as string)"
   />
 </template>
 
 <script setup lang="ts">
-import { useRecipeStore } from "@/stores/recipe";
-import { storeToRefs } from "pinia";
-import { computed } from "@vue/reactivity";
 import RecipeSearch from "../components/recipe/RecipeSearch.vue";
+import { useQuery } from "vue-query";
+import { fetchRecipes } from "@/services/RecipeService";
 
-const { filteredRecipes, recipes, loading, error } = storeToRefs(
-  useRecipeStore()
-);
-
-const recipeStore = useRecipeStore();
-recipeStore.fetchRecipes();
-
-const noSearchResult = computed(() => {
-  return filteredRecipes.value.length == 0 && recipes.value.length > 0;
-});
+const { isLoading, data, error } = useQuery("recipes", fetchRecipes);
 </script>
