@@ -1,30 +1,31 @@
 <template>
   <RecipeSearch
-    :recipes="filteredRecipes"
-    :no-search-result="noSearchResult"
-    :loading="loading"
-    :error="error"
+    :recipes="data"
+    :is-loading="isLoading"
+    :error="(error as string)"
   />
 </template>
 
 <script lang="ts" setup>
-import { useFavoriteStore } from "@/stores/favorite";
+import { fetchFavorites } from "@/services/FavoriteService";
 import { useAuth0 } from "@auth0/auth0-vue";
-import { storeToRefs } from "pinia";
-import { computed } from "vue";
+import { ref, watch } from "vue";
+import { useQuery, useQueryClient } from "vue-query";
 import RecipeSearch from "../components/recipe/RecipeSearch.vue";
 
 const { user } = useAuth0();
+const queryClient = useQueryClient();
+const isLoading = ref(true);
 
-const { filteredRecipes, recipes, loading, error } = storeToRefs(
-  useFavoriteStore()
-);
+const { data, error } = useQuery("favorites", () => {
+  if (user.value.sub) {
+    return fetchFavorites(user.value.sub);
+  }
+});
 
-const favoriteStore = useFavoriteStore();
-
-favoriteStore.fetchFavorites(user.value.sub ?? "0");
-
-const noSearchResult = computed(() => {
-  return filteredRecipes.value.length == 0 && recipes.value.length > 0;
+watch(user, () => {
+  queryClient
+    .invalidateQueries("favorites")
+    .then(() => (isLoading.value = false));
 });
 </script>

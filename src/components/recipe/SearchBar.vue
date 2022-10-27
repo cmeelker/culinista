@@ -15,21 +15,20 @@
 
 <script lang="ts" setup>
 import { ref, watch } from "vue";
-import { useRecipeStore } from "@/stores/recipe";
 
 const filter = ref("");
-const recipeStore = useRecipeStore();
 const showClearIcon = ref(false);
+
+const emit = defineEmits(["filterRecipes"]);
 
 watch(filter, (newFilter) => {
   if (newFilter != "") {
     showClearIcon.value = true;
   }
-  recipeStore.filterRecipes(newFilter);
+  emit("filterRecipes", newFilter);
 });
 
 function clearFilter() {
-  recipeStore.fetchRecipes();
   filter.value = "";
   showClearIcon.value = false;
   (document.activeElement as HTMLElement).blur();

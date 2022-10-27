@@ -4,47 +4,47 @@
     <h1 class="text-2xl sm:text-5xl font-bold mb-12">Recept toevoegen</h1>
 
     <InputCard
-      class="mb-10"
+      class="mb-6"
       :title="'Vul de link naar het recept in'"
       :number="1"
-      :isDone="fetchedPreview"
+      :isDone="previewIsFetched"
       ><q-input
         class="bg-white mt-4"
         outlined
-        v-model="url"
+        v-model="newRecipe.url"
         placeholder="https://www.allerhande.nl/lekker-recept"
         dense
         color="brand"
-        :disable="fetchedPreview"
+        type="url"
+        :disable="previewIsFetched"
       />
     </InputCard>
 
     <div
-      v-if="!fetchedPreview"
-      :class="{ 'px-5 py-1 mb-5 -mt-5': error, 'border-none': !error }"
-      class="bg-red-100 rounded border border-red-300"
+      v-if="error"
+      class="bg-red-100 rounded border border-red-300 mb-6 px-2 py-1"
     >
-      {{ error }}
+      Er is iets mis gegaan bij het laden van jouw recept
     </div>
 
     <q-btn
-      v-if="!fetchedPreview"
+      v-if="!previewIsFetched"
       unelevated
       color="brand"
       text-color="white"
       label="Zoek recept"
       class="mb-10"
-      :loading="loading"
-      :disable="!url"
-      @click="fetchPreview"
+      :loading="isLoading"
+      :disable="!newRecipe.url"
+      @click="() => refetch()"
     />
 
-    <div v-if="fetchedPreview" class="flex flex-col w-full space-y-10 mb-10">
-      <InputCard :title="'Titel'" :number="2" :isDone="fetchedPreview"
+    <div v-if="previewIsFetched" class="flex flex-col w-full space-y-10 mb-10">
+      <InputCard :title="'Titel'" :number="2" :isDone="previewIsFetched"
         ><q-input
           class="bg-white mt-4"
           outlined
-          v-model="title"
+          v-model="newRecipe.title"
           placeholder="https://www.allerhande.nl/lekker-recept"
           dense
           color="brand"
@@ -52,37 +52,29 @@
       <InputCard
         :title="'Kies een afbeelding'"
         :number="3"
-        :isDone="selectedImage !== ''"
+        :isDone="newRecipe.image !== ''"
       >
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-4">
           <div v-for="image in images" :key="image">
             <ImagePicker
               :image="image"
-              :isSelected="selectedImage === image"
-              @select-image="selectedImage = image"
+              :isSelected="newRecipe.image === image"
+              @select-image="newRecipe.image = image"
             />
           </div>
         </div>
       </InputCard>
     </div>
 
-    <div
-      v-if="fetchedPreview"
-      :class="{ 'px-5 py-1 mb-5 -mt-5': error, 'border-none': !error }"
-      class="bg-red-100 rounded border border-red-300"
-    >
-      {{ error }}
-    </div>
-
     <q-btn
-      v-if="fetchedPreview"
+      v-if="previewIsFetched"
       unelevated
       color="brand"
       text-color="white"
       label="Recept toevoegen"
       class="mb-10"
-      :loading="loading"
-      :disable="!url"
+      :loading="isLoading"
+      :disable="!newRecipe.url"
       @click="addRecipe"
     />
 
@@ -98,56 +90,57 @@
 <script setup lang="ts">
 import InputCard from "@/components/forms/InputCard.vue";
 import ImagePicker from "@/components/forms/ImagePicker.vue";
-import { useRecipeStore } from "@/stores/recipe";
-import { storeToRefs } from "pinia";
-import { ref, type Ref } from "vue";
+import { reactive, ref, type Ref } from "vue";
 import router from "@/router";
 import { useAuth0 } from "@auth0/auth0-vue";
+import { fetchRecipePreview, postRecipe } from "@/services/RecipeService";
+import { QInput, QBtn } from "quasar";
+import { useMutation, useQuery } from "vue-query";
+import type { RecipePreview } from "@/models/RecipePreview";
+import type { NewRecipe } from "@/models/Recipe";
 
-const recipeStore = useRecipeStore();
-const { error } = storeToRefs(useRecipeStore());
 const { user } = useAuth0();
 
-const fetchedPreview = ref(false);
-const loading = ref(false);
+const emptyRecipe = {};
+let newRecipe: NewRecipe = reactive(emptyRecipe as NewRecipe);
 
-const url = ref("");
-const title = ref("");
 const images: Ref<string[]> = ref([]);
-const selectedImage = ref("");
-const favicon: Ref<string | null> = ref(null);
-const userId: string = user.value.sub ?? "anonymous";
+const previewIsFetched = ref(false);
 
-async function fetchPreview() {
-  loading.value = true;
+const { refetch, isLoading, error } = useQuery(
+  ["recipePreview", newRecipe.url],
+  () => fetchRecipePreview(newRecipe.url as string),
+  {
+    enabled: false,
+    onSuccess: (data: RecipePreview) => {
+      newRecipe.title = data.title;
+      images.value = data.images;
+      newRecipe.image = data.images[0];
+      newRecipe.favicon = data.favicon ? data.favicon : undefined;
 
-  const recipePreview = await recipeStore.fetchRecipePreview(url.value);
-  if (recipePreview) {
-    title.value = recipePreview.title;
-    images.value = recipePreview.images;
-    selectedImage.value = recipePreview.images[0];
-    favicon.value = recipePreview.favicon ? recipePreview.favicon : null;
-
-    fetchedPreview.value = true;
+      previewIsFetched.value = true;
+    },
   }
-  loading.value = false;
-}
+);
+
+const addRecipeMutation = useMutation(
+  (newRecipe: NewRecipe) => {
+    newRecipe.userId = user.value.sub ?? "anonymous";
+    return postRecipe(newRecipe);
+  },
+  {
+    onSuccess: (recipeId) => {
+      newRecipe = emptyRecipe as NewRecipe;
+      previewIsFetched.value = false;
+
+      router.push(`/recipe/${recipeId}`);
+
+      addRecipeMutation.reset;
+    },
+  }
+);
 
 async function addRecipe() {
-  loading.value = true;
-
-  const id = await recipeStore.addRecipe({
-    title: title.value,
-    url: url.value,
-    image: selectedImage.value,
-    userId: userId,
-    favicon: favicon.value ? favicon.value : undefined,
-  });
-
-  if (id) {
-    router.push(`/recipe/${id}`);
-  }
-
-  loading.value = false;
+  addRecipeMutation.mutate(newRecipe);
 }
 </script>

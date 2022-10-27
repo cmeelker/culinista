@@ -5,7 +5,7 @@ export type Recipe = NewRecipe & { id: number };
 
 export type NewRecipe = {
   title: string;
-  tags?: Tag[];
+  tags: Tag[];
   url: string;
   image: string;
   userId: string;
