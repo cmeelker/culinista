@@ -15,7 +15,7 @@
           <q-item clickable v-close-popup @click="$emit('showEditComponent')">
             <q-item-section>Tags wijzigen</q-item-section>
           </q-item>
-          <q-item clickable v-close-popup @click="deleteRecipe()">
+          <q-item clickable v-close-popup @click="onDeleteRecipe()">
             <q-item-section>Recept verwijderen</q-item-section>
           </q-item>
         </q-list>
@@ -27,10 +27,19 @@
 <script setup lang="ts">
 import type { Recipe } from "@/models/Recipe";
 import router from "@/router";
+import { deleteRecipe } from "@/services/RecipeService";
 import { useFavoriteStore } from "@/stores/favorite";
-import { useRecipeStore } from "@/stores/recipe";
 import { useAuth0 } from "@auth0/auth0-vue";
-import { useQuasar } from "quasar";
+import {
+  QBtn,
+  QIcon,
+  QItem,
+  QItemSection,
+  QList,
+  QMenu,
+  useQuasar,
+} from "quasar";
+import { useMutation } from "vue-query";
 
 const props = defineProps<{
   recipe: Recipe;
@@ -42,10 +51,31 @@ defineEmits(["showEditComponent"]);
 const { user } = useAuth0();
 
 const $q = useQuasar();
-const recipeStore = useRecipeStore();
 const favoriteStore = useFavoriteStore();
 
-function deleteRecipe() {
+const { mutate } = useMutation(
+  (recipeId: number) => {
+    return deleteRecipe(recipeId);
+  },
+  {
+    onSuccess: () => {
+      router.push(`/`);
+
+      $q.notify({
+        message: "Recept is verwijderd",
+        color: "secondary",
+      });
+    },
+    onError: () => {
+      $q.notify({
+        message: "Recept verwijderen is niet gelukt",
+        color: "warning",
+      });
+    },
+  }
+);
+
+function onDeleteRecipe() {
   $q.dialog({
     title: "Bevestigen",
     message: "Weet je zeker dat je dit recept wilt verwijderen?",
@@ -53,17 +83,7 @@ function deleteRecipe() {
     ok: { label: "Oke", flat: true, color: "brand" },
     cancel: { label: "Annuleer", flat: true, color: "black" },
   }).onOk(async () => {
-    if (props.recipe.id) {
-      await recipeStore.deleteRecipe(props.recipe.id);
-    }
-
-    // TO DO: Error afhandeling
-
-    $q.notify({
-      message: "Recept is verwijderd",
-      color: "secondary",
-    });
-    router.push(`/`);
+    mutate(props.recipe.id);
   });
 }
 

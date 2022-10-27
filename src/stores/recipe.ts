@@ -17,13 +17,5 @@ export const useRecipeStore = defineStore({
       }
       //await this.fetchRecipe(id, false);
     },
-
-    async deleteRecipe(id: number) {
-      try {
-        await axios.delete(`/Recipe/${id}`);
-      } catch (error) {
-        console.log(error);
-      }
-    },
   },
 });

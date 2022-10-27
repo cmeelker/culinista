@@ -15,8 +15,8 @@ export async function fetchRecipes() {
   return recipes;
 }
 
-export async function fetchRecipe(id: number) {
-  const { data } = await axios.get(`/Recipe/${id}`);
+export async function fetchRecipe(recipeId: number) {
+  const { data } = await axios.get(`/Recipe/${recipeId}`);
   const recipe = recipeMapper.map(data);
   return mapToInternalRecipe(recipe);
 }
@@ -29,4 +29,8 @@ export async function fetchRecipePreview(url: string) {
 export async function postRecipe(recipe: NewRecipe) {
   const { data } = await axios.post(`/Recipe`, recipe);
   return data;
+}
+
+export async function deleteRecipe(recipeId: number) {
+  await axios.delete(`/Recipe/${recipeId}`);
 }
