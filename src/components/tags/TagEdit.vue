@@ -25,18 +25,20 @@
 </template>
 
 <script lang="ts" setup>
-import { useRecipeStore } from "@/stores/recipe";
 import { VueTagsInput } from "@sipec/vue3-tags-input";
 import { Tag } from "@/models/Tag";
 import { ref } from "vue";
+import { patchTags } from "@/services/RecipeService";
+import { QBtn } from "quasar";
+import { useMutation, useQueryClient } from "vue-query";
+
+const queryClient = useQueryClient();
 
 defineEmits(["closeEditComponent"]);
 const props = defineProps<{
   recipeId: number;
   tags: Tag[];
 }>();
-
-const recipeStore = useRecipeStore();
 
 const tag = ref("");
 const tags = ref(
@@ -53,12 +55,23 @@ const autocompleteItems = ref(
     })
 );
 
+const { mutate } = useMutation(
+  (data: { recipeId: number; tags: Tag[] }) => {
+    return patchTags(data);
+  },
+  {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["recipe", props.recipeId]);
+    },
+  }
+);
+
 async function saveTags() {
   const tagList = tags.value.map((tag) => {
     return tag.text;
   });
 
-  await recipeStore.editTags(props.recipeId, tagList);
+  mutate({ recipeId: props.recipeId, tags: tagList });
 }
 </script>
 

@@ -4,6 +4,7 @@ import {
   type NewRecipe,
   type Recipe,
 } from "@/models/Recipe";
+import type { Tag } from "@/models/Tag";
 import axios from "@/services/ApiClient";
 import type { Source } from "@jeroenhuinink/tsmapper";
 
@@ -33,4 +34,15 @@ export async function postRecipe(recipe: NewRecipe) {
 
 export async function deleteRecipe(recipeId: number) {
   await axios.delete(`/Recipe/${recipeId}`);
+}
+
+export async function patchTags({
+  recipeId,
+  tags,
+}: {
+  recipeId: number;
+  tags: Tag[];
+}) {
+  const tagString = tags?.length > 0 ? tags.toString() : null;
+  await axios.patch(`/Recipe/${recipeId}`, { tags: tagString });
 }

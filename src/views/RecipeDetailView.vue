@@ -9,7 +9,7 @@
     <h2 class="sm:text-4xl text-2xl mt-16 mb-4">Vergelijkbare recepten</h2>
     <hr class="border-b-[1px] border-b-dark w-full" />
 
-    <RecipeGrid :recipes="recipes" />
+    <RecipeGrid :recipes="recipes || []" />
   </div>
 </template>
 
@@ -24,7 +24,7 @@ import { useQuery } from "vue-query";
 const route = useRoute();
 const id = +route.params.id;
 
-const { isLoading, data, error } = useQuery(["recipes", id], () =>
+const { isLoading, data, error } = useQuery(["recipe", id], () =>
   fetchRecipe(id)
 );
 
