@@ -14,9 +14,9 @@
         class="h-6"
       />
     </div>
-    <div class="flex items-center my-1.5 mx-2.5 w-full">
-      <div class="font-bold basis-5/6">{{ recipe.title }}</div>
-      <div class="basis-1/6">
+    <div class="flex items-center justify-between my-1.5 mx-2.5 w-full">
+      <div class="font-bold basis-4/6">{{ recipe.title }}</div>
+      <div class="basis-1/6 ml-2">
         <img
           v-if="recipe.favicon === undefined"
           src="@/assets/fork-knive-icon.png"

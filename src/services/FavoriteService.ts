@@ -19,3 +19,14 @@ export async function postFavorite({
 }) {
   await axios.post(`/Favorite?userId=${userId}&recipeId=${recipeId}`);
 }
+
+export async function fetchIsFavorite({
+  userId,
+  recipeId,
+}: {
+  userId: string;
+  recipeId: number;
+}) {
+  const { data } = await axios.get(`Favorite/${recipeId}?userId=${userId}`);
+  return data;
+}

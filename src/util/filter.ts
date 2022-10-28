@@ -4,6 +4,7 @@ export default function filterRecipes(
   filter: string,
   recipes: Recipe[]
 ): Recipe[] {
+  filter = filter.toLowerCase();
   return recipes.filter((recipe) => {
     const includesTitle = recipe.title.toLowerCase().includes(filter);
     const includesTags = recipe.tags

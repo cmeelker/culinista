@@ -14,18 +14,28 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from "vue-router";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import RecipeDetails from "@/components/recipe/RecipeDetails.vue";
 import RecipeGrid from "@/components/recipe/RecipeGrid.vue";
 import { fetchRecipe, fetchRecipes } from "@/services/RecipeService";
-import { useQuery } from "vue-query";
+import { useQuery, useQueryClient } from "vue-query";
+import { watch } from "vue";
 
-const route = useRoute();
-const id = +route.params.id;
+const queryClient = useQueryClient();
 
-const { isLoading, data, error } = useQuery(["recipe", id], () =>
-  fetchRecipe(id)
+const props = defineProps<{
+  recipeId: number;
+}>();
+
+watch(
+  () => props.recipeId,
+  () => {
+    queryClient.invalidateQueries("recipe");
+  }
+);
+
+const { isLoading, data, error } = useQuery(["recipe", props.recipeId], () =>
+  fetchRecipe(props.recipeId)
 );
 
 const recipesQuery = useQuery("recipes", fetchRecipes);

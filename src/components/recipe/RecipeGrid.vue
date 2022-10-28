@@ -16,8 +16,6 @@ defineProps<{
 }>();
 
 function openRecipe(id?: number) {
-  router.push(`/recipe/${id}`).then(() => {
-    window.location.reload();
-  });
+  router.push(`/recipe/${id}`);
 }
 </script>

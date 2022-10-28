@@ -6,6 +6,9 @@ import FavoriteView from "@/views/FavoriteView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior() {
+    return { top: 0, behavior: "smooth" };
+  },
   routes: [
     {
       path: "/",
@@ -15,6 +18,9 @@ const router = createRouter({
     {
       path: "/recipe/:id",
       name: "recipe",
+      props: (route) => ({
+        recipeId: +route.params.id,
+      }),
       component: RecipeView,
     },
     {

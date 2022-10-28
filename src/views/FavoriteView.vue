@@ -4,6 +4,9 @@
     :is-loading="false"
     :error="(error as string)"
   />
+  <div v-if="isFetched && data?.length === 0" class="ml-5 mb-5 mt-5">
+    Je hebt nog een favorieten!
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -16,7 +19,7 @@ import RecipeSearch from "../components/recipe/RecipeSearch.vue";
 const { user } = useAuth0();
 const queryClient = useQueryClient();
 
-const { data, error } = useQuery("favorites", () => {
+const { data, error, isFetched } = useQuery("favorites", () => {
   return fetchFavorites(user.value.sub as string);
 });
 
