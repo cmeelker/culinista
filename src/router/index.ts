@@ -24,13 +24,13 @@ const router = createRouter({
       component: RecipeView,
     },
     {
-      path: "/addRecipe",
+      path: "/add-recipe",
       name: "addRecipe",
       component: AddRecipeView,
     },
     {
-      path: "/favourite",
-      name: "favourite",
+      path: "/favorite",
+      name: "favorite",
       component: FavoriteView,
     },
   ],

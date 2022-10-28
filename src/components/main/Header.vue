@@ -14,10 +14,10 @@
       <div class="menu">
         <nav class="stroke">
           <ul>
-            <li @click="goToProtectedPage('/favourite', 'Favorieten')">
+            <li @click="goToProtectedPage('/favorite', 'Favorieten')">
               Favorieten
             </li>
-            <li @click="goToProtectedPage('/addRecipe', 'Recepten toevoegen')">
+            <li @click="goToProtectedPage('/add-recipe', 'Recepten toevoegen')">
               Recept toevoegen
             </li>
           </ul>
