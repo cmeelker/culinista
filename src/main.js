@@ -7,11 +7,13 @@ import { Quasar } from "quasar";
 import quasarUserOptions from "./quasar-user-options";
 import "quasar/dist/quasar.sass";
 import { createAuth0 } from "@auth0/auth0-vue";
+import { VueQueryPlugin } from "vue-query";
 
 const app = createApp(App);
 
 app.use(Quasar, quasarUserOptions);
 app.use(createPinia());
+app.use(VueQueryPlugin);
 app.use(router);
 app.use(
   createAuth0({
