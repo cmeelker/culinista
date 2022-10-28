@@ -22,7 +22,7 @@ const heartColor = computed(() => {
     (r) => r.id === props.recipeId
   );
 
-  return isFavorite ? "red" : "grey";
+  return isFavorite ? "accent" : "grey";
 });
 
 const favoritesQuery = useQuery("favorites", () => {

@@ -92,14 +92,3 @@ function formatUrl(url: string) {
   return splittedUrl[2];
 }
 </script>
-
-<style lang="scss">
-@import "@/styles/quasar.variables.scss";
-
-.button {
-  background: $primary;
-  margin: 5px 0px;
-  width: 100%;
-  color: white;
-}
-</style>

@@ -35,8 +35,6 @@ window.onscroll = function () {
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/quasar.variables.scss";
-
 .header-transition {
   transition: top 0.4s;
 }
