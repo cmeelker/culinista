@@ -5,29 +5,29 @@
 </template>
 
 <script setup lang="ts">
-import { fetchIsFavorite, postFavorite } from "@/services/FavoriteService";
+import { fetchFavorites, postFavorite } from "@/services/FavoriteService";
 import { computed } from "@vue/reactivity";
 import { QBtn, QIcon } from "quasar";
-import { useMutation, useQuery } from "vue-query";
+import { useMutation, useQuery, useQueryClient } from "vue-query";
 
 const props = defineProps<{
   userId: string;
   recipeId: number;
 }>();
 
+const queryClient = useQueryClient();
+
 const heartColor = computed(() => {
-  return isFavoriteQuery.data.value ? "red" : "grey";
+  const isFavorite = favoritesQuery.data.value?.find(
+    (r) => r.id === props.recipeId
+  );
+
+  return isFavorite ? "red" : "grey";
 });
 
-let isFavoriteQuery = useQuery(
-  ["favorite", props.userId, props.recipeId],
-  () => {
-    return fetchIsFavorite({
-      userId: props.userId,
-      recipeId: props.recipeId,
-    });
-  }
-);
+const favoritesQuery = useQuery("favorites", () => {
+  return fetchFavorites(props.userId);
+});
 
 const favoriteMutation = useMutation(
   (data: { userId: string; recipeId: number }) => {
@@ -36,9 +36,16 @@ const favoriteMutation = useMutation(
 );
 
 async function onToggleFavorite() {
-  favoriteMutation.mutate({
-    userId: props.userId,
-    recipeId: props.recipeId,
-  });
+  favoriteMutation.mutate(
+    {
+      userId: props.userId,
+      recipeId: props.recipeId,
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("favorites");
+      },
+    }
+  );
 }
 </script>
