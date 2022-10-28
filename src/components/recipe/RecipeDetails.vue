@@ -68,7 +68,7 @@ import TagList from "@/components/tags/TagList.vue";
 import TagEdit from "@/components/tags/TagEdit.vue";
 import type { Recipe } from "@/models/Recipe";
 import { ref } from "vue";
-import ActionsButtons from "./ActionsButtons.vue";
+import ActionsButtons from "./actions/ActionsButtons.vue";
 import { getUserName } from "@/services/UserService";
 import { QBtn, QDialog, QCard, QCardSection } from "quasar";
 
