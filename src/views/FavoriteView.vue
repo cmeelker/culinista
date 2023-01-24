@@ -16,11 +16,13 @@ import { watch } from "vue";
 import { useQuery, useQueryClient } from "vue-query";
 import RecipeSearch from "../components/recipe/RecipeSearch.vue";
 
-const { user } = useAuth0();
+const { user, getAccessTokenSilently } = useAuth0();
 const queryClient = useQueryClient();
 
+const accessToken = await getAccessTokenSilently();
+
 const { data, error, isFetched } = useQuery("favorites", () => {
-  return fetchFavorites(user.value.sub as string);
+  return fetchFavorites(user.value.sub as string, accessToken);
 });
 
 watch(user, () => {
